@@ -1,7 +1,12 @@
 package com.example;
+
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -18,16 +23,27 @@ public class MemberPane {
 
     public void show() {
         primaryStage.setTitle("Member Page");
-
+        
         StackPane stackPane = new StackPane();
-        stackPane.setAlignment(Pos.CENTER);
 
         Text title = new Text("Welcome to the Member Page!");
+        stackPane.setAlignment(Pos.TOP_CENTER);
         title.setFont(Font.font("Arial", FontWeight.BOLD, 30));
+        title.setLayoutY(50);
 
         stackPane.getChildren().add(title);
 
-        Scene scene = new Scene(stackPane, 600, 400);
+        Button payClassButton = new Button("Pay for Class");
+        payClassButton.setMinWidth(100);
+        payClassButton.setMinHeight(70);
+
+        StackPane buttonPane = new StackPane();
+        buttonPane.setAlignment(Pos.CENTER_RIGHT);
+
+        buttonPane.getChildren().add(payClassButton);
+        StackPane.setMargin(payClassButton, new Insets(0, 100,0, 0));
+
+        Scene scene = new Scene(new StackPane(stackPane, buttonPane), 600, 400);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
