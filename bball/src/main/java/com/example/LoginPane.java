@@ -39,18 +39,23 @@ public class LoginPane {
         gridPane.setAlignment(Pos.CENTER);
 
         Label usernameLabel = new Label("Username:");
+        usernameLabel.setFont(Font.font("Arial"));
         GridPane.setConstraints(usernameLabel, 0, 0);
         TextField usernameField = new TextField();
         usernameField.setPromptText("Enter your username");
+        usernameField.setFont(Font.font("Arial"));
         GridPane.setConstraints(usernameField, 1, 0);
 
         Label passwordLabel = new Label("Password:");
+        passwordLabel.setFont(Font.font("Arial"));
         GridPane.setConstraints(passwordLabel, 0, 1);
         PasswordField passwordField = new PasswordField();
         passwordField.setPromptText("Enter your password");
+        passwordField.setFont(Font.font("Arial"));
         GridPane.setConstraints(passwordField, 1, 1);
 
         Button loginButton = new Button("Login");
+        loginButton.setFont(Font.font("Arial"));
         GridPane.setConstraints(loginButton, 0, 2);
         loginButton.setOnAction(e -> {
             String username = usernameField.getText();
@@ -72,6 +77,7 @@ public class LoginPane {
         });
 
         Button createAccountButton = new Button("Create Account");
+        createAccountButton.setFont(Font.font("Arial"));
         GridPane.setConstraints(createAccountButton, 1, 2);
         createAccountButton.setOnAction(e -> {
             RegistrationPane registrationPane = new RegistrationPane(primaryStage);
