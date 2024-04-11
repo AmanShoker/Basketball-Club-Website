@@ -7,48 +7,30 @@ public class FileManager {
     private static final String USERS_FILE = "users.txt";
 
     public static boolean validateUser(Account account) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(USERS_FILE))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(",");
-                if (parts.length == 3 && parts[0].equals(account.getUsername()) && parts[1].equals(account.getPassword())) {
-                    return true;
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        Account storedAccount = AccountDatabase.allAccounts.get(account.getUsername());
+        
+        if (storedAccount != null && storedAccount.getPassword().equals(account.getPassword())) {
+            return true;
         }
         return false;
     }
 
     public static boolean isEmployee(Account account) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(USERS_FILE))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(",");
-                if (parts.length == 3 && parts[0].equals(account.getUsername()) && parts[1].equals(account.getPassword()) 
-                    && parts[2].equals("COACH")) {
-                    return true;
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        Account storedAccount = AccountDatabase.allAccounts.get(account.getUsername());
+        
+        if (storedAccount != null && storedAccount.getPassword().equals(account.getPassword()) 
+            && storedAccount.getType().equals("COACH")) {
+            return true;
         }
         return false;
     }
 
     public static boolean isTreasurer(Account account) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(USERS_FILE))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(",");
-                if (parts.length == 3 && parts[0].equals(account.getUsername()) && parts[1].equals(account.getPassword()) 
-                    && parts[2].equals("TREASURER")) {
-                    return true;
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        Account storedAccount = AccountDatabase.allAccounts.get(account.getUsername());
+        
+        if (storedAccount != null && storedAccount.getPassword().equals(account.getPassword()) 
+            && storedAccount.getType().equals("TREASURER")) {
+            return true;
         }
         return false;
     }
@@ -72,16 +54,10 @@ public class FileManager {
     }
 
     private static boolean userExists(String username) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(USERS_FILE))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(",");
-                if (parts.length > 0 && parts[0].equals(username)) {
-                    return true;
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        Account storedAccount = AccountDatabase.allAccounts.get(username);
+        
+        if (storedAccount != null) {
+            return true;
         }
         return false;
     }
