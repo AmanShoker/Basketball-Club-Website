@@ -52,7 +52,7 @@ public class MemberPane {
         imageView.setFitWidth(50);
         Button button = new Button(buttonText, imageView);
         button.setContentDisplay(javafx.scene.control.ContentDisplay.TOP);
-        button.setStyle("-fx-font-size: 16px;");
+        button.setStyle("-fx-font-size: 16px; -fx-font-family: Arial;");
         return button;
     }
 }
