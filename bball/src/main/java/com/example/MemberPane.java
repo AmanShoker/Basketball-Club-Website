@@ -7,6 +7,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -30,31 +31,28 @@ public class MemberPane {
         title.setFont(Font.font("Arial", FontWeight.BOLD, 30));
         title.setLayoutY(50);
 
-        stackPane.getChildren().add(title);
 
-        Image image = new Image(getClass().getResourceAsStream("/Drose.png"));
-    
-        ImageView imageView = new ImageView(image);
-        stackPane.getChildren().add(imageView);
-        stackPane.setAlignment(imageView, Pos.CENTER_LEFT);
-        stackPane.setMargin(imageView, new Insets(0, 0,0, 50));
-        imageView.fitHeightProperty().bind(primaryStage.heightProperty().divide(2));
-        imageView.fitWidthProperty().bind(primaryStage.widthProperty().divide(3));
+        HBox buttonBox = new HBox(20);
+        buttonBox.setAlignment(Pos.CENTER);
+        buttonBox.getChildren().add(createButtonWithImage("Schedule Class", "/jumpball.png"));
 
-        Button payClassButton = new Button("Pay for Class");
-        payClassButton.setMinWidth(100);
-        payClassButton.setMinHeight(70);
+        StackPane.setMargin(buttonBox, new Insets(0, 0, 0, 0));
 
-        StackPane buttonPane = new StackPane();
-        buttonPane.setAlignment(Pos.CENTER_RIGHT);
+        stackPane.getChildren().addAll(buttonBox, title);
 
-        buttonPane.getChildren().add(payClassButton);
-        StackPane.setMargin(payClassButton, new Insets(0, 100,0, 0));
-
-        Scene scene = new Scene(new StackPane(stackPane, buttonPane), 600, 400);
+        Scene scene = new Scene(stackPane, 600, 400);
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
 
-
+    private Button createButtonWithImage(String buttonText, String imagePath) {
+        Image image = new Image(getClass().getResourceAsStream(imagePath));
+        ImageView imageView = new ImageView(image);
+        imageView.setFitHeight(50);
+        imageView.setFitWidth(50);
+        Button button = new Button(buttonText, imageView);
+        button.setContentDisplay(javafx.scene.control.ContentDisplay.TOP);
+        button.setStyle("-fx-font-size: 16px;");
+        return button;
     }
 }
