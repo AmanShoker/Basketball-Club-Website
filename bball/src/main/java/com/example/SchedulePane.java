@@ -29,7 +29,6 @@ public class SchedulePane {
 
         Label titleLabel = new Label("Select a Class:");
         titleLabel.setFont(Font.font("Helvetica"));
-        titleLabel.setPadding(new Insets(30,0,0,0));
 
         ComboBox<String> comboBox = new ComboBox<>();
         comboBox.getItems().addAll("Option 1", "Option 2", "Option 3", "Option 4", "Option 5");
@@ -38,6 +37,7 @@ public class SchedulePane {
 
         Button yesButton = new Button("Continue");
         yesButton.setFont(Font.font("Helvetica"));
+
         Button backButton = new Button("Back");
         backButton.setFont(Font.font("Helvetica"));
 
@@ -48,12 +48,23 @@ public class SchedulePane {
         yesButton.setPrefWidth(100);
         yesButton.setPrefHeight(50);
 
+        comboBox.setOnAction(e -> {
+            if (comboBox.getValue() != null) {
+                yesButton.setDisable(false);
+            }
+        });
+
+        backButton.setOnAction(e -> {
+            MemberPane memberPane = new MemberPane(primaryStage);
+            memberPane.show();
+        });
+
         HBox hBox = new HBox(50, backButton, yesButton);
         hBox.setAlignment(Pos.CENTER);
         hBox.setPadding(new Insets(0,0,50,0));
 
         VBox vBox = new VBox(10, titleLabel,comboBox);   
-        vBox.setPadding(new Insets(50, 0, 0, 0));
+        vBox.setPadding(new Insets(100, 0, 0, 0));
         vBox.setAlignment(Pos.TOP_CENTER);
 
         BorderPane borderPane = new BorderPane();
@@ -66,6 +77,7 @@ public class SchedulePane {
         title.setLayoutY(50);
 
         stackPane.getChildren().addAll(title, borderPane);
+        stackPane.setPadding(new Insets(10, 0,0,0));
         Scene scene = new Scene(stackPane, 600, 400);
         primaryStage.setScene(scene);
         primaryStage.show();
