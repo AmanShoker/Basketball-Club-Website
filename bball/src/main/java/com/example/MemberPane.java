@@ -34,7 +34,13 @@ public class MemberPane {
 
         HBox buttonBox = new HBox(20);
         buttonBox.setAlignment(Pos.CENTER);
-        buttonBox.getChildren().addAll(createButtonWithImage("Schedule Class", "/jumpball.png"), createButtonWithImage("Make Payment", "/payment.png"));
+        Button scheduleButton = createButtonWithImage("Schedule Class", "/jumpball.png");
+        scheduleButton.setOnAction(e -> {
+            SchedulePane schedulePane = new SchedulePane(primaryStage);
+            schedulePane.show();
+        });
+        Button paymentButton = createButtonWithImage("Make Payment", "/payment.png");
+        buttonBox.getChildren().addAll(scheduleButton, paymentButton);
 
         StackPane.setMargin(buttonBox, new Insets(0, 0, 0, 0));
 
