@@ -4,6 +4,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -20,9 +22,12 @@ public class SchedulePane {
     }
 
     public void show() {
+
         primaryStage.setTitle("Schedule Your Classes");
 
         StackPane stackPane = new StackPane();
+
+        Label titleLabel = new Label("Select an Option:");
 
         ComboBox<String> comboBox = new ComboBox<>();
         comboBox.getItems().addAll("Option 1", "Option 2", "Option 3", "Option 4", "Option 5");
@@ -30,31 +35,38 @@ public class SchedulePane {
         comboBox.setVisibleRowCount(5);
 
         Button yesButton = new Button("Yes");
+        Button backButton = new Button("Back");
+
+        backButton.setPrefWidth(100);
+        backButton.setPrefHeight(50);
+
         yesButton.setDisable(true); 
+        yesButton.setPrefWidth(100);
+        yesButton.setPrefHeight(50);
 
-        comboBox.setOnAction(event -> {
-            if (comboBox.getValue() != null) {
-                yesButton.setDisable(false); 
-            }
-        });
+        HBox hBox = new HBox(50, backButton, yesButton);
+        hBox.setAlignment(Pos.CENTER);
+        hBox.setPadding(new Insets(0,0,50,0));
 
-        VBox vBox = new VBox(10, comboBox, yesButton);
+        VBox vBox = new VBox(10, titleLabel,comboBox);   
+        vBox.setPadding(new Insets(50, 0, 0, 0));
         vBox.setAlignment(Pos.TOP_CENTER);
-        Insets margin = new Insets(50, 0, 0, 0);     
-        vBox.setPadding(margin);
-        stackPane.getChildren().add(vBox);
+
+        BorderPane borderPane = new BorderPane();
+        borderPane.setCenter(vBox);
+        borderPane.setBottom(hBox);
 
         Text title = new Text("Schedule Your Classes");
         stackPane.setAlignment(Pos.TOP_CENTER);
         title.setFont(Font.font("Helvetica", FontWeight.BOLD, 30));
         title.setLayoutY(50);
-        stackPane.getChildren().add(title);
-        
+
+
+        stackPane.getChildren().addAll(title, borderPane);
         Scene scene = new Scene(stackPane, 600, 400);
         primaryStage.setScene(scene);
         primaryStage.show();
-
-
     }
 
+    
 }
