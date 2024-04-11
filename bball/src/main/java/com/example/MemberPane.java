@@ -6,9 +6,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -35,10 +32,11 @@ public class MemberPane {
 
         stackPane.getChildren().add(title);
 
-
         Image image = new Image(getClass().getResourceAsStream("/Drose.png"));
-
+    
         ImageView imageView = new ImageView(image);
+        imageView.setFitWidth(200);
+        imageView.setFitHeight(300);
         stackPane.getChildren().add(imageView);
         stackPane.setAlignment(imageView, Pos.CENTER_LEFT);
 
