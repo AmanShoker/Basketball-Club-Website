@@ -35,10 +35,11 @@ public class MemberPane {
         Image image = new Image(getClass().getResourceAsStream("/Drose.png"));
     
         ImageView imageView = new ImageView(image);
-        imageView.setFitWidth(200);
-        imageView.setFitHeight(300);
         stackPane.getChildren().add(imageView);
         stackPane.setAlignment(imageView, Pos.CENTER_LEFT);
+        stackPane.setMargin(imageView, new Insets(0, 0,0, 50));
+        imageView.fitHeightProperty().bind(primaryStage.heightProperty().divide(2));
+        imageView.fitWidthProperty().bind(primaryStage.widthProperty().divide(3));
 
         Button payClassButton = new Button("Pay for Class");
         payClassButton.setMinWidth(100);
