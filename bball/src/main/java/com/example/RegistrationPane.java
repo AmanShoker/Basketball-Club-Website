@@ -53,18 +53,12 @@ public class RegistrationPane {
         GridPane.setConstraints(passwordField, 1, 1);
 
         Button createAccountButton = new Button("Create Account");
-        GridPane.setConstraints(createAccountButton, 0, 2);
-        /*createAccountButton.setOnAction(e -> {
-            String username = usernameField.getText();
-            String password = passwordField.getText();
-            if (!username.isEmpty() && !password.isEmpty()) {
-                FileManager.registerUser(username, password, false); 
-                System.out.println("Account created successfully!");
-                navigateToLoginPage();
-            } else {
-                System.out.println("Username and password cannot be empty.");
-            }
-        });*/
+        GridPane.setConstraints(createAccountButton, 1, 2);
+
+        Button backButton = new Button("Back");
+        GridPane.setConstraints(backButton, 0, 2);
+        backButton.setOnAction(e -> navigateToLoginPage());
+
 
         createAccountButton.setOnAction(e -> {
             String username = usernameField.getText();
@@ -95,7 +89,7 @@ public class RegistrationPane {
             }
         });
 
-        gridPane.getChildren().addAll(usernameLabel, usernameField, passwordLabel, passwordField, createAccountButton);
+        gridPane.getChildren().addAll(usernameLabel, usernameField, passwordLabel, passwordField, createAccountButton, backButton);
         stackPane.getChildren().add(gridPane);
 
         return stackPane;
