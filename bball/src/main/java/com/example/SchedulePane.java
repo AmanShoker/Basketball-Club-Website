@@ -27,15 +27,19 @@ public class SchedulePane {
 
         StackPane stackPane = new StackPane();
 
-        Label titleLabel = new Label("Select an Option:");
+        Label titleLabel = new Label("Select a Class:");
+        titleLabel.setFont(Font.font("Helvetica"));
+        titleLabel.setPadding(new Insets(30,0,0,0));
 
         ComboBox<String> comboBox = new ComboBox<>();
         comboBox.getItems().addAll("Option 1", "Option 2", "Option 3", "Option 4", "Option 5");
-        comboBox.setPrefWidth(150);
+        comboBox.setPrefWidth(200);
         comboBox.setVisibleRowCount(5);
 
-        Button yesButton = new Button("Yes");
+        Button yesButton = new Button("Continue");
+        yesButton.setFont(Font.font("Helvetica"));
         Button backButton = new Button("Back");
+        backButton.setFont(Font.font("Helvetica"));
 
         backButton.setPrefWidth(100);
         backButton.setPrefHeight(50);
@@ -60,7 +64,6 @@ public class SchedulePane {
         stackPane.setAlignment(Pos.TOP_CENTER);
         title.setFont(Font.font("Helvetica", FontWeight.BOLD, 30));
         title.setLayoutY(50);
-
 
         stackPane.getChildren().addAll(title, borderPane);
         Scene scene = new Scene(stackPane, 600, 400);
