@@ -4,6 +4,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -57,6 +58,25 @@ public class SchedulePane {
         backButton.setOnAction(e -> {
             MemberPane memberPane = new MemberPane(primaryStage);
             memberPane.show();
+        });
+
+        yesButton.setOnAction(e -> {
+            Alert alert = new Alert(AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation Dialog");
+            alert.setHeaderText("Are You Sure You Want To Proceed?");
+            ButtonType buttonTypeYes = new ButtonType("Yes");
+            ButtonType buttonTypeNo = new ButtonType("No");
+            alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
+            alert.showAndWait().ifPresent(response -> {
+                if (response == buttonTypeYes) {
+                    Alert paymentAlert = new Alert(AlertType.CONFIRMATION);
+                    // Once a balance is added to the account class, update the 
+                    // user's balance (not implemented yet)
+                    paymentAlert.setTitle("Transaction Complete");
+                    paymentAlert.setHeaderText("A Charge Has Been Added to Your Account, Would You Like to Pay This Balance Now?");
+                    paymentAlert.show();
+                }
+            });
         });
 
         HBox hBox = new HBox(50, backButton, yesButton);
