@@ -27,7 +27,23 @@ public class FileManager {
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
                 if (parts.length == 3 && parts[0].equals(account.getUsername()) && parts[1].equals(account.getPassword()) 
-                    && !parts[2].equals("USER")) {
+                    && !parts[2].equals("USER") && !parts[3].equals("TREASURER")) {
+                    return true;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static boolean isTreasurer(Account account) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(USERS_FILE))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (parts.length == 3 && parts[0].equals(account.getUsername()) && parts[1].equals(account.getPassword()) 
+                    && !parts[2].equals("USER") && !parts[3].equals("COACH")) {
                     return true;
                 }
             }

@@ -67,7 +67,11 @@ public class LoginPane {
                 System.out.println("Login successful!");
                 if (FileManager.isEmployee(account)) {
                     navigateToEmployeePage();
-                } else {
+                }
+                else if (FileManager.isTreasurer(account)) {
+                    navigateToTreasurerPage();
+                }
+                else {
                     navigateToMemberPage();
                 }
             } else {
@@ -100,6 +104,11 @@ public class LoginPane {
     private void navigateToEmployeePage() {
         EmployeePane employeePane = new EmployeePane(primaryStage);
         employeePane.show();
+    }
+
+    private void navigateToTreasurerPage() {
+        TreasurerPane treasurerPane = new TreasurerPane(primaryStage);
+        treasurerPane.show();
     }
     
 }
