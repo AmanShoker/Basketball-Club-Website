@@ -30,7 +30,7 @@ public class RegistrationPane {
     private Pane createRegistrationPane() {
         StackPane stackPane = new StackPane();
         Text title = new Text("Create Account");
-        title.setFont(Font.font("Arial", FontWeight.BOLD, 30));
+        title.setFont(Font.font("Helvetica", FontWeight.BOLD, 30));
         StackPane.setAlignment(title, Pos.TOP_CENTER);
         StackPane.setMargin(title, new Insets(20, 0, 0, 0));
         stackPane.getChildren().add(title);

@@ -28,7 +28,7 @@ public class MemberPane {
 
         Text title = new Text("Welcome to the Member Page!");
         stackPane.setAlignment(Pos.TOP_CENTER);
-        title.setFont(Font.font("Arial", FontWeight.BOLD, 30));
+        title.setFont(Font.font("Helvetica", FontWeight.BOLD, 30));
         title.setLayoutY(50);
 
 
@@ -52,7 +52,7 @@ public class MemberPane {
         imageView.setFitWidth(50);
         Button button = new Button(buttonText, imageView);
         button.setContentDisplay(javafx.scene.control.ContentDisplay.TOP);
-        button.setStyle("-fx-font-size: 16px; -fx-font-family: Arial;");
+        button.setStyle("-fx-font-size: 16px; -fx-font-family: Helvetica;");
         return button;
     }
 }

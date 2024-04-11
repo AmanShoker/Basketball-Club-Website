@@ -30,7 +30,7 @@ public class EmployeePane {
 
         // Text title at the top
         Text title = new Text("Welcome to the Employee Page!");
-        title.setFont(Font.font("Arial", FontWeight.BOLD, 30));
+        title.setFont(Font.font("Helvetica", FontWeight.BOLD, 30));
 
         // Images for buttons
         Image memberLogsImage = new Image(getClass().getResourceAsStream("/data.png"));
@@ -68,7 +68,7 @@ public class EmployeePane {
         imageView.setFitWidth(50);
         Button button = new Button(buttonText, imageView);
         button.setContentDisplay(javafx.scene.control.ContentDisplay.TOP);
-        button.setStyle("-fx-font-size: 16px; -fx-font-family: Arial;");
+        button.setStyle("-fx-font-size: 16px; -fx-font-family: Helvetica;");
         return button;
     }
 
@@ -80,7 +80,7 @@ public class EmployeePane {
         imageView.setFitWidth(50);
         Button button = new Button(buttonText, imageView);
         button.setContentDisplay(javafx.scene.control.ContentDisplay.TOP);
-        button.setStyle("-fx-font-size: 16px; -fx-font-family: Arial;");
+        button.setStyle("-fx-font-size: 16px; -fx-font-family: Helvetica;");
         return button;
     }
 }
