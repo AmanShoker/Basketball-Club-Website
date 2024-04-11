@@ -1,2 +1,2 @@
-Sarthak,123,true
-Lebron,123,false
+Sarthak,123,COACH
+Lebron,123,USER

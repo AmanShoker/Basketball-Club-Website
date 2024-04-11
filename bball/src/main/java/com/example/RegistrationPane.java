@@ -72,7 +72,10 @@ public class RegistrationPane {
             String reEnteredPassword = reEnterPasswordField.getText();
             if (!username.isEmpty() && !password.isEmpty() && !reEnteredPassword.isEmpty()) {
                 if (password.equals(reEnteredPassword)) {
-                    boolean success = FileManager.registerUser(username, password, false);
+
+                    Account account = new Account(username, password);
+
+                    boolean success = FileManager.registerUser(account);
                     if (success) {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("Account Created");

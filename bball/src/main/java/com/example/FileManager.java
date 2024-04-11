@@ -6,12 +6,12 @@ public class FileManager {
 
     private static final String USERS_FILE = "users.txt";
 
-    public static boolean validateUser(String username, String password) {
+    public static boolean validateUser(Account account) {
         try (BufferedReader reader = new BufferedReader(new FileReader(USERS_FILE))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
-                if (parts.length == 3 && parts[0].equals(username) && parts[1].equals(password)) {
+                if (parts.length == 3 && parts[0].equals(account.getUsername()) && parts[1].equals(account.getPassword())) {
                     return true;
                 }
             }
@@ -21,12 +21,13 @@ public class FileManager {
         return false;
     }
 
-    public static boolean isEmployee(String username, String password) {
+    public static boolean isEmployee(Account account) {
         try (BufferedReader reader = new BufferedReader(new FileReader(USERS_FILE))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
-                if (parts.length == 3 && parts[0].equals(username) && parts[1].equals(password) && parts[2].equals("true")) {
+                if (parts.length == 3 && parts[0].equals(account.getUsername()) && parts[1].equals(account.getPassword()) 
+                    && !parts[2].equals("USER")) {
                     return true;
                 }
             }
@@ -36,9 +37,9 @@ public class FileManager {
         return false;
     }
 
-    public static boolean registerUser(String username, String password, boolean isEmployee) {
+    public static boolean registerUser(Account account) {
         // Check if the user already exists
-        if (userExists(username)) {
+        if (userExists(account.getUsername())) {
             System.out.println("User already exists.");
             return false;
         }
@@ -46,7 +47,7 @@ public class FileManager {
         // Register the new user
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(USERS_FILE, true))) {
             writer.newLine();
-            writer.write(username + "," + password + "," + isEmployee + "\n");
+            writer.write(account.getUsername() + "," + account.getPassword() + ",USER" + "\n");
             return true;
         } catch (IOException e) {
             e.printStackTrace();
