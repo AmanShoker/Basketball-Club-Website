@@ -32,16 +32,6 @@ public class EmployeePane {
         Text title = new Text("Welcome to the Employee Page!");
         title.setFont(Font.font("Helvetica", FontWeight.BOLD, 30));
 
-        // Images for buttons
-        Image memberLogsImage = new Image(getClass().getResourceAsStream("/data.png"));
-        Image financesImage = new Image(getClass().getResourceAsStream("/money.png"));
-        Image schedulingImage = new Image(getClass().getResourceAsStream("/schedule.png"));
-
-        // Buttons for navigating to different pages with images
-        Button memberLogsButton = createButton("Member Logs", memberLogsImage);
-        Button financesButton = createButton("Finances", financesImage);
-        Button schedulingButton = createButton("Scheduling", schedulingImage);
-
         // HBox to arrange buttons horizontally
         HBox buttonBox = new HBox(20);
         buttonBox.setAlignment(Pos.CENTER);
