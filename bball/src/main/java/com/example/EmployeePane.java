@@ -35,8 +35,13 @@ public class EmployeePane {
         // HBox to arrange buttons horizontally
         HBox buttonBox = new HBox(20);
         buttonBox.setAlignment(Pos.CENTER);
+        Button memberLogsButton = createButtonWithImage("Member Logs", "/data.png");
+        memberLogsButton.setOnAction(e -> {
+            MemberLogsPane memberLogsPane = new MemberLogsPane(primaryStage);
+            memberLogsPane.show();
+        });
         buttonBox.getChildren().addAll(
-                createButtonWithImage("Member Logs", "/data.png"),
+                memberLogsButton,
                 createButtonWithImage("Finances", "/money.png"),
                 createButtonWithImage("Scheduling", "/schedule.png"));
 
