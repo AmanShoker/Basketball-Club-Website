@@ -60,9 +60,12 @@ public class LoginPane {
         loginButton.setOnAction(e -> {
             String username = usernameField.getText();
             String password = passwordField.getText();
-            if (FileManager.validateUser(username, password)) {
+
+            Account account = new Account(username, password);
+
+            if (FileManager.validateUser(account)) {
                 System.out.println("Login successful!");
-                if (FileManager.isEmployee(username, password)) {
+                if (FileManager.isEmployee(account)) {
                     navigateToEmployeePage();
                 } else {
                     navigateToMemberPage();
