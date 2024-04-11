@@ -40,11 +40,19 @@ public class EmployeePane {
             MemberLogsPane memberLogsPane = new MemberLogsPane(primaryStage);
             memberLogsPane.show();
         });
+
+        Button sendMessageButton = createButtonWithImage("Send a Message", "/schedule.png");
+        sendMessageButton.setOnAction(e -> {
+            MessageComposerPane messageComposerPane = new MessageComposerPane(primaryStage);
+            messageComposerPane.show();
+        });
+
         buttonBox.getChildren().addAll(
                 memberLogsButton,
                 createButtonWithImage("Finances", "/money.png"),
-                createButtonWithImage("Scheduling", "/schedule.png"));
-
+                createButtonWithImage("Scheduling", "/schedule.png"),
+                sendMessageButton);
+        
         // Position buttons slightly lower
         StackPane.setMargin(buttonBox, new Insets(50, 0, 0, 0));
 
