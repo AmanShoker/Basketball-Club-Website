@@ -34,8 +34,8 @@ public class TreasurerPane {
 
         HBox buttonBox = new HBox(20);
         buttonBox.setAlignment(Pos.CENTER);
-        buttonBox.getChildren().addAll(createButtonWithImage("Generate Income Statement", "/jumpball.png"), createButtonWithImage("Update Expenses", "/payment.png"),
-                                                            createButtonWithImage("View Monthly Profit", "/jumpball.png"));
+        buttonBox.getChildren().addAll(createButtonWithImage("Generate Income Statement", "/generateStatement.png"), createButtonWithImage("Update Expenses", "/updateExpenses.png"),
+                                                            createButtonWithImage("View Monthly Profit", "/viewProfit.png"));
 
         StackPane.setMargin(buttonBox, new Insets(0, 0, 0, 0));
 
