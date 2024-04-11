@@ -4,6 +4,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -33,6 +35,13 @@ public class MemberPane {
 
         stackPane.getChildren().add(title);
 
+
+        Image image = new Image(getClass().getResourceAsStream("/Drose.png"));
+
+        ImageView imageView = new ImageView(image);
+        stackPane.getChildren().add(imageView);
+        stackPane.setAlignment(imageView, Pos.CENTER_LEFT);
+
         Button payClassButton = new Button("Pay for Class");
         payClassButton.setMinWidth(100);
         payClassButton.setMinHeight(70);
@@ -46,5 +55,7 @@ public class MemberPane {
         Scene scene = new Scene(new StackPane(stackPane, buttonPane), 600, 400);
         primaryStage.setScene(scene);
         primaryStage.show();
+
+
     }
 }
