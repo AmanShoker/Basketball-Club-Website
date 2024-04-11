@@ -34,66 +34,81 @@ public class RegistrationPane {
         StackPane.setAlignment(title, Pos.TOP_CENTER);
         StackPane.setMargin(title, new Insets(20, 0, 0, 0));
         stackPane.getChildren().add(title);
-
+    
         GridPane gridPane = new GridPane();
         gridPane.setVgap(20);
         gridPane.setHgap(10);
         gridPane.setAlignment(Pos.CENTER);
-
+    
         Label usernameLabel = new Label("Username:");
         GridPane.setConstraints(usernameLabel, 0, 0);
         TextField usernameField = new TextField();
         usernameField.setPromptText("Enter your username");
         GridPane.setConstraints(usernameField, 1, 0);
-
+    
         Label passwordLabel = new Label("Password:");
         GridPane.setConstraints(passwordLabel, 0, 1);
         PasswordField passwordField = new PasswordField();
         passwordField.setPromptText("Enter your password");
         GridPane.setConstraints(passwordField, 1, 1);
-
+    
+        Label reEnterPasswordLabel = new Label("Re-enter Password:");
+        GridPane.setConstraints(reEnterPasswordLabel, 0, 2);
+        PasswordField reEnterPasswordField = new PasswordField();
+        reEnterPasswordField.setPromptText("Re-enter your password");
+        GridPane.setConstraints(reEnterPasswordField, 1, 2);
+    
         Button createAccountButton = new Button("Create Account");
-        GridPane.setConstraints(createAccountButton, 1, 2);
-
+        GridPane.setConstraints(createAccountButton, 1, 3);
+    
         Button backButton = new Button("Back");
-        GridPane.setConstraints(backButton, 0, 2);
+        GridPane.setConstraints(backButton, 0, 3);
+    
         backButton.setOnAction(e -> navigateToLoginPage());
-
-
+    
         createAccountButton.setOnAction(e -> {
             String username = usernameField.getText();
             String password = passwordField.getText();
-            if (!username.isEmpty() && !password.isEmpty()) {
-                boolean success = FileManager.registerUser(username, password, false);
-                if (success) {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Account Created");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Account created successfully!");
-                    alert.showAndWait();
-                    navigateToLoginPage();
+            String reEnteredPassword = reEnterPasswordField.getText();
+            if (!username.isEmpty() && !password.isEmpty() && !reEnteredPassword.isEmpty()) {
+                if (password.equals(reEnteredPassword)) {
+                    boolean success = FileManager.registerUser(username, password, false);
+                    if (success) {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Account Created");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Account created successfully!");
+                        alert.showAndWait();
+                        navigateToLoginPage();
+                    } else {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Error");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Username already exists!");
+                        alert.showAndWait();
+                    }
                 } else {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error");
                     alert.setHeaderText(null);
-                    alert.setContentText("Username already exists!");
+                    alert.setContentText("Passwords do not match!");
                     alert.showAndWait();
-                    navigateToLoginPage();
                 }
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
                 alert.setHeaderText(null);
-                alert.setContentText("Username and password cannot be empty!");
+                alert.setContentText("Please fill in all fields!");
                 alert.showAndWait();
             }
         });
-
-        gridPane.getChildren().addAll(usernameLabel, usernameField, passwordLabel, passwordField, createAccountButton, backButton);
+    
+        gridPane.getChildren().addAll(usernameLabel, usernameField, passwordLabel, passwordField, reEnterPasswordLabel, reEnterPasswordField, createAccountButton, backButton);
         stackPane.getChildren().add(gridPane);
-
+    
         return stackPane;
     }
+    
 
     private void navigateToLoginPage() {
         LoginPane loginPane = new LoginPane(primaryStage);
