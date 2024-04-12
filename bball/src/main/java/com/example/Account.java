@@ -24,7 +24,6 @@ public class Account implements Comparable<Account> {
         this.address = "N/A";
         this.feesPaid = true;
         this.attendence = 0;
-        this.revenue = 0;
         this.messages = new ArrayList<String>();
 	}
 
