@@ -132,7 +132,7 @@ public class Account implements Comparable<Account> {
         return this.messages;
     }
 
-    public void addMessage(String meesage) {
-        this.messages.add(meesage);
+    public void addMessage(String message) {
+        this.messages.add(message);
     }
 }
