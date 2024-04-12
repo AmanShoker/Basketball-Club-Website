@@ -59,8 +59,7 @@ public class PaymentPane {
         VBox vBox = new VBox(20, balance, amount, hbox, back);
         vBox.setAlignment(Pos.TOP_CENTER);
 
-        wholePayment.setOnAction( e -> {
-
+        wholePayment.setOnAction(e -> {
             Alert alert = new Alert(AlertType.CONFIRMATION);
             alert.setTitle("Confirmation Dialog");
             alert.setHeaderText("Are You Sure You Want To Proceed?");
@@ -70,34 +69,34 @@ public class PaymentPane {
             
             alert.showAndWait().ifPresent(response -> {
                 if (response == buttonTypeYes) {
-
                     if (user.getBalance() == 0) {
                         Alert paymentAlert = new Alert(AlertType.ERROR);
                         paymentAlert.setTitle("No Balance");
                         paymentAlert.setHeaderText("There is No Balance to Pay");
                         paymentAlert.show();
-
                     } else {
-
-                    Alert paymentAlert = new Alert(AlertType.INFORMATION);
-                    paymentAlert.setTitle("Transaction Complete");
-                    paymentAlert.setHeaderText("Your Payment Has Been Processed!");
-
-
-                    user.payBalance(user.getBalance());
-                    vBox.getChildren().remove(amount);
-
-                    amount.setText(Double.toString(0));
-
-                    vBox.getChildren().add(1, amount);
-                    paymentAlert.setTitle("Transaction Complete");
-                    paymentAlert.show();
+                        Alert paymentAlert = new Alert(AlertType.INFORMATION);
+                        paymentAlert.setTitle("Transaction Complete");
+                        paymentAlert.setHeaderText("Your Payment Has Been Processed!");
+        
+                        double paymentAmount = user.getBalance();
+                        user.payBalance(paymentAmount);
+        
+                        // Update the income statement with the payment amount
+                        IncomeStatement incomeStatement = new IncomeStatement();
+                        incomeStatement.recordRevenue(paymentAmount);
+        
+                        vBox.getChildren().remove(amount);
+                        amount.setText(Double.toString(0));
+                        vBox.getChildren().add(1, amount);
+                        
+                        paymentAlert.setTitle("Transaction Complete");
+                        paymentAlert.show();
                     }
-
                 }
             });
         });
-
+        
         onePayment.setOnAction( e -> {
 
             Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -152,7 +151,6 @@ public class PaymentPane {
         Scene scene = new Scene(stackPane, 600, 400);
         primaryStage.setScene(scene);
         primaryStage.show();
-
     }
 }
 
