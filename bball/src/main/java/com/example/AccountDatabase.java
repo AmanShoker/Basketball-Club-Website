@@ -48,6 +48,7 @@ public class AccountDatabase {
                     account.setFeesPaid(Boolean.parseBoolean(parts[6]));
                     account.setAttendence(Integer.parseInt(parts[7]));
                     account.setRevenue(Double.parseDouble(parts[8]));
+                    account.setMessages();
                     storeAccount(account);
                 }
             }

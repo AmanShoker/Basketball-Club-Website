@@ -8,6 +8,7 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import javafx.scene.Node;
 
 public class MessageComposerPane {
     private Stage primaryStage;
@@ -73,6 +74,14 @@ public class MessageComposerPane {
             System.out.println("Message: " + message);
             System.out.println("Send to all: " + sendToAll);
 
+            if (sendToAll) {
+                // Send message to all members
+                sendToAllMembers(message);
+            } else {
+                // Send message to specific recipients
+                sendToSelectedRecipients(message);
+            }
+            
             navigateToEmployeePage();
         });
 
@@ -137,5 +146,30 @@ public class MessageComposerPane {
     private void navigateToEmployeePage() {
         EmployeePane employeePane = new EmployeePane(primaryStage);
         employeePane.show();
+    }
+
+    // Method to send message to all members
+    private void sendToAllMembers(String message) {
+        for (String username : AccountDatabase.allAccounts.keySet()) {
+            Account account = AccountDatabase.allAccounts.get(username);
+            account.addMessage(message);
+        }
+    }
+
+    // Method to send message to selected recipients
+    private void sendToSelectedRecipients(String message) {
+        VBox recipientsBox = (VBox) vbox.getChildren().get(5);
+        for (Node node : recipientsBox.getChildren()) {
+            if (node instanceof Label) {
+                Label recipientLabel = (Label) node;
+                String recipientUsername = recipientLabel.getText();
+                if (usernameExists(recipientUsername)) {
+                    Account account = AccountDatabase.allAccounts.get(recipientUsername);
+                    account.addMessage(message);
+                } else {
+                    System.out.println("Recipient username does not exist: " + recipientUsername);
+                }
+            }
+        }
     }
 }

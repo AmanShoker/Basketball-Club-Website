@@ -128,6 +128,10 @@ public class Account implements Comparable<Account> {
         return this.revenue;
     }
 
+    public ArrayList<String> setMessages() {
+        return this.messages = new ArrayList<String>();
+    }
+
     public ArrayList<String> getMessages() {
         return this.messages;
     }
