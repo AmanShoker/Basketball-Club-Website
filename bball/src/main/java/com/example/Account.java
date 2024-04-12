@@ -9,6 +9,7 @@ public class Account implements Comparable<Account> {
     private String phoneNumber;
     private String address;
     private Boolean feesPaid;
+    private int attendence;
 	
 	public Account() {
 		this.username = "";
@@ -18,6 +19,7 @@ public class Account implements Comparable<Account> {
         this.phoneNumber = "N/A";
         this.address = "N/A";
         this.feesPaid = true;
+        this.attendence = 0;
 	}
 
     public Account(String username, String password) {
@@ -93,5 +95,13 @@ public class Account implements Comparable<Account> {
 
     public void setFeesPaid(Boolean feesPaid) {
         this.feesPaid = feesPaid;
+    }  
+
+    public void attendedClass() {
+        this.attendence += 1;
+    }
+
+    public int getAttendence() {
+        return this.attendence;
     }
 }

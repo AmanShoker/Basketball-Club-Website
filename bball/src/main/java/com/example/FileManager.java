@@ -11,6 +11,10 @@ public class FileManager {
         database = new AccountDatabase();
     }
 
+    public AccountDatabase getDatabase() {
+        return database;
+    }
+
     public static boolean validateUser(Account account) {
         Account storedAccount = AccountDatabase.allAccounts.get(account.getUsername());
         
@@ -55,7 +59,7 @@ public class FileManager {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(USERS_FILE, true))) {
             writer.newLine();
             writer.write(account.getUsername() + "," + account.getPassword() + "," + account.getType()
-                        + "," + account.getBalance() + ",N/A,N/A,true\n");
+                        + "," + account.getBalance() + ",N/A,N/A,true," + account.getAttendence() + "\n");
 
             return true;
         } catch (IOException e) {

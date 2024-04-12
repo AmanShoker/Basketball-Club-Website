@@ -85,17 +85,51 @@ public class AccountDatabase {
     //High to Low
     public void sortAccountByBalanceDescending() {
         Collections.sort(userAccounts, new AccountBalanceDescendingComparator());
-       }
+    }
    
-       private class AccountBalanceDescendingComparator implements Comparator<Account> {
-           public int compare(Account a, Account b) {
-               if (a.getBalance() < b.getBalance()) {
-                   return 1;
-               } else if (a.getBalance() > b.getBalance()) {
-                   return -1;
-               } else {
-                   return 0;
-               }	
-           }
-       }
+    private class AccountBalanceDescendingComparator implements Comparator<Account> {
+        public int compare(Account a, Account b) {
+            if (a.getBalance() < b.getBalance()) {
+                return 1;
+            } else if (a.getBalance() > b.getBalance()) {
+                return -1;
+            } else {
+                return 0;
+            }	
+        }
+    }
+
+    //Low to High
+    public void sortAccountByAttendenceAscending() {
+        Collections.sort(userAccounts, new AccountAttendenceAscendingComparator());
+    }
+    
+    private class AccountAttendenceAscendingComparator implements Comparator<Account> {
+        public int compare(Account a, Account b) {
+            if (a.getAttendence() > b.getAttendence()) {
+                return 1;
+            } else if (a.getAttendence() < b.getAttendence()) {
+                return -1;
+            } else {
+                return 0;
+            }	
+        }
+    }
+        
+    //High to Low
+    public void sortAccountByAttendenceDescending() {
+        Collections.sort(userAccounts, new AccountAttendenceDescendingComparator());
+    }
+    
+    private class AccountAttendenceDescendingComparator implements Comparator<Account> {
+        public int compare(Account a, Account b) {
+            if (a.getAttendence() < b.getAttendence()) {
+                return 1;
+            } else if (a.getAttendence() > b.getAttendence()) {
+                return -1;
+            } else {
+                return 0;
+            }	
+        }
+    }
 }
