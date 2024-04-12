@@ -10,6 +10,7 @@ public class Account implements Comparable<Account> {
     private String address;
     private Boolean feesPaid;
     private int attendence;
+    private double revenue;
 	
 	public Account() {
 		this.username = "";
@@ -20,6 +21,7 @@ public class Account implements Comparable<Account> {
         this.address = "N/A";
         this.feesPaid = true;
         this.attendence = 0;
+        this.revenue = 0;
 	}
 
     public Account(String username, String password) {
@@ -71,6 +73,7 @@ public class Account implements Comparable<Account> {
     public void payBalance(double amount) {
         this.balance -= amount;
         setFeesPaid(this.balance <= 0);
+        AddToBalance(amount);
     }
 
     public String getPhoneNumber() {
@@ -107,5 +110,17 @@ public class Account implements Comparable<Account> {
 
     public int getAttendence() {
         return this.attendence;
+    }
+
+    public void setRevenue(double amount) {
+        this.revenue = amount;
+    }
+
+    public void addToRevenue(double amount) {
+        this.revenue += amount;
+    }
+
+    public double getRevenue() {
+        return this.revenue;
     }
 }

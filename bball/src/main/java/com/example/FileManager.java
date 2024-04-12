@@ -59,7 +59,8 @@ public class FileManager {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(USERS_FILE, true))) {
             writer.newLine();
             writer.write(account.getUsername() + "," + account.getPassword() + "," + account.getType()
-                        + "," + account.getBalance() + ",N/A,N/A,true," + account.getAttendence() + "\n");
+                        + "," + account.getBalance() + ",N/A,N/A,true," + account.getAttendence() 
+                        + "," + account.getRevenue() +"\n");
 
             return true;
         } catch (IOException e) {

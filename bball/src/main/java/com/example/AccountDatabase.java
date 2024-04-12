@@ -39,7 +39,7 @@ public class AccountDatabase {
                     account.setType(parts[2]);
                     storeAccount(account);
 
-                } else if (parts.length == 8) {
+                } else if (parts.length == 9) {
                     Account account = new Account(parts[0], parts[1]);
                     account.setType(parts[2]);
                     account.AddToBalance(Double.parseDouble(parts[3]));
@@ -47,6 +47,7 @@ public class AccountDatabase {
                     account.setAddress(parts[5]);
                     account.setFeesPaid(Boolean.parseBoolean(parts[6]));
                     account.setAttendence(Integer.parseInt(parts[7]));
+                    account.setRevenue(Double.parseDouble(parts[8]));
                     storeAccount(account);
                 }
             }
