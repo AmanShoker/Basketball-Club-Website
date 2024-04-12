@@ -131,11 +131,12 @@ public class MemberLogsPane
         });
 
         stackPane.getChildren().addAll(title, message, backButton, filtersMenu, submitButton);
-        stackPane.setAlignment(backButton, Pos.TOP_LEFT);
+        stackPane.setMargin(backButton, new Insets(95, 225, 0, 0));
+        stackPane.setAlignment(backButton, Pos.TOP_CENTER);
         stackPane.setAlignment(filtersMenu, Pos.TOP_CENTER);
         stackPane.setMargin(filtersMenu, new Insets(100, 0, 0, 0));
-        stackPane.setMargin(message, new Insets(52, 0, 0, 15));
-        stackPane.setAlignment(message, Pos.TOP_LEFT);
+        stackPane.setMargin(message, new Insets(52, 0, 0, 0));
+        stackPane.setAlignment(message, Pos.TOP_CENTER);
         stackPane.setAlignment(submitButton, Pos.BOTTOM_CENTER);
         stackPane.setMargin(submitButton, new Insets(0, 0, 10, 0));
 
