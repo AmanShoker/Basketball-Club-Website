@@ -49,6 +49,7 @@ public class AccountDatabase {
                     account.setAttendence(Integer.parseInt(parts[7]));
                     account.setRevenue(Double.parseDouble(parts[8]));
                     account.setMessages();
+                    account.setClasses();
                     storeAccount(account);
                 }
             }

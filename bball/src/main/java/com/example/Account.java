@@ -14,6 +14,7 @@ public class Account implements Comparable<Account> {
     private int attendence;
     private double revenue;
     private ArrayList<String> messages;
+    private ArrayList<String> classes;
 	
 	public Account() {
 		this.username = "";
@@ -26,6 +27,7 @@ public class Account implements Comparable<Account> {
         this.attendence = 0;
         this.revenue = 0;
         this.messages = new ArrayList<String>();
+        this.classes = new ArrayList<String>();
 	}
 
     public Account(String username, String password) {
@@ -128,8 +130,8 @@ public class Account implements Comparable<Account> {
         return this.revenue;
     }
 
-    public ArrayList<String> setMessages() {
-        return this.messages = new ArrayList<String>();
+    public void setMessages() {
+        this.messages = new ArrayList<String>();
     }
 
     public ArrayList<String> getMessages() {
@@ -142,5 +144,21 @@ public class Account implements Comparable<Account> {
 
     public void addMessage(String message) {
         this.messages.add(message);
+    }
+
+    public void setClasses() {
+        this.classes = new ArrayList<String>();
+    }
+
+    public ArrayList<String> getClasses() {
+        return this.classes;
+    }
+
+    public void removeClasses(){
+        this.classes.remove(0);
+    }
+
+    public void addClasses(String message) {
+        this.classes.add(message);
     }
 }

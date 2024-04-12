@@ -50,9 +50,13 @@ public class SchedulePane {
         yesButton.setPrefWidth(100);
         yesButton.setPrefHeight(50);
 
+        Account user = AccountDatabase.allAccounts.get(LoginPane.getUsername());
+
         comboBox.setOnAction(e -> {
-            if (comboBox.getValue() != null) {
+            if (comboBox.getValue() != null && user.getClasses().contains(comboBox.getValue()) == false) {
                 yesButton.setDisable(false);
+            } else {
+                yesButton.setDisable(true);
             }
         });
 
@@ -74,7 +78,6 @@ public class SchedulePane {
                 if (response == buttonTypeYes) {
 
                     Alert paymentAlert = new Alert(AlertType.CONFIRMATION);
-                    Account user = AccountDatabase.allAccounts.get(LoginPane.getUsername());
                     FileManager.getDatabase().sortAccountByAttendenceDescending();
                     if (AccountDatabase.userAccounts.size() >= 10){ 
                         if (AccountDatabase.userAccounts.subList(0, 9).contains(user) == true || user.getAttendence() >= 12) {
@@ -86,6 +89,7 @@ public class SchedulePane {
                         user.AddToBalance(9);
                     }
                     user.attendedClass();
+                    user.addClasses(comboBox.getValue());
                     paymentAlert.setTitle("Transaction Complete");
                     paymentAlert.setHeaderText("A Charge Has Been Added to Your Account, Would You Like to Pay This Balance Now?");
                     paymentAlert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
