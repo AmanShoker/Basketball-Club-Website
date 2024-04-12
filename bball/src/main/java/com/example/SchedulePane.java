@@ -33,6 +33,7 @@ public class SchedulePane {
 
         ComboBox<String> comboBox = new ComboBox<>();
         comboBox.getItems().addAll("Option 1", "Option 2", "Option 3", "Option 4", "Option 5");
+
         comboBox.setPrefWidth(200);
         comboBox.setVisibleRowCount(5);
 
@@ -61,20 +62,30 @@ public class SchedulePane {
         });
 
         yesButton.setOnAction(e -> {
+            
             Alert alert = new Alert(AlertType.CONFIRMATION);
             alert.setTitle("Confirmation Dialog");
             alert.setHeaderText("Are You Sure You Want To Proceed?");
             ButtonType buttonTypeYes = new ButtonType("Yes");
             ButtonType buttonTypeNo = new ButtonType("No");
             alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
+
             alert.showAndWait().ifPresent(response -> {
                 if (response == buttonTypeYes) {
+
                     Alert paymentAlert = new Alert(AlertType.CONFIRMATION);
-                    // Once a balance is added to the account class, update the 
-                    // user's balance (not implemented yet)
+                    Account user = AccountDatabase.allAccounts.get(LoginPane.getUsername());
+                    user.AddToBalance(10);
                     paymentAlert.setTitle("Transaction Complete");
                     paymentAlert.setHeaderText("A Charge Has Been Added to Your Account, Would You Like to Pay This Balance Now?");
-                    paymentAlert.show();
+                    paymentAlert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
+                    paymentAlert.showAndWait().ifPresent(event -> {
+                        if (event == buttonTypeYes) {
+                            PaymentPane paymentPane = new PaymentPane(primaryStage);
+                            paymentPane.show();
+                        } 
+                    }
+                    );
                 }
             });
         });
