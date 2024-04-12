@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 
 public class MessageComposerPane {
     private Stage primaryStage;
+    private EmployeePane employeePane;
     private VBox vbox;
 
     public MessageComposerPane(Stage primaryStage) {
@@ -72,8 +73,7 @@ public class MessageComposerPane {
             System.out.println("Message: " + message);
             System.out.println("Send to all: " + sendToAll);
 
-            // Close the window after sending the message
-            primaryStage.close();
+            navigateToEmployeePage();
         });
 
         VBox recipientsBox = new VBox();
@@ -132,5 +132,10 @@ public class MessageComposerPane {
     private void removeAllRecipients() {
         VBox recipientsBox = (VBox) vbox.getChildren().get(5); // Assuming recipientsBox is the 5th child of vbox
         recipientsBox.getChildren().clear(); // Clear existing recipients
+    }
+
+    private void navigateToEmployeePage() {
+        EmployeePane employeePane = new EmployeePane(primaryStage);
+        employeePane.show();
     }
 }
