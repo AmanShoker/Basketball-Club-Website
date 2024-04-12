@@ -200,7 +200,7 @@ public class TreasurerPane {
 
             double profit = totalRevenue - totalExpenses;
             TreeItem<String> treeRoot = new TreeItem<>("Total Profit");
-            TreeItem<String> treeChild1 = new TreeItem<>("Expenses: $" + String.valueOf(profit));
+            TreeItem<String> treeChild1 = new TreeItem<>("Profit: $" + String.valueOf(profit));
             treeRoot.getChildren().add(treeChild1);
             dummyRoot.getChildren().add(treeRoot);
 
