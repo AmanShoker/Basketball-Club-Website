@@ -1,3 +1,5 @@
 Sarthak,123,COACH
 Lebron,123,USER
 Andre,123,TREASURER
+Jatil,234,USER
+Yakin,123,USER,0.0,N/A,N/A,true
