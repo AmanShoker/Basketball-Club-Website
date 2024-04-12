@@ -32,10 +32,10 @@ public class SchedulePane {
         titleLabel.setFont(Font.font("Helvetica"));
 
         ComboBox<String> comboBox = new ComboBox<>();
-        comboBox.getItems().addAll("Option 1", "Option 2", "Option 3", "Option 4", "Option 5");
+        comboBox.getItems().addAll("Week 1", "Week 2", "Week 3", "Week 4");
 
         comboBox.setPrefWidth(200);
-        comboBox.setVisibleRowCount(5);
+        comboBox.setVisibleRowCount(4);
 
         Button yesButton = new Button("Continue");
         yesButton.setFont(Font.font("Helvetica"));

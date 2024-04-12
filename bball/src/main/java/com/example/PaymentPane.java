@@ -77,12 +77,39 @@ public class PaymentPane {
                     user.payBalance(user.getBalance());
                     vBox.getChildren().remove(amount);
 
-                    Text new_balance = new Text(Double.toString(0));
-                    new_balance.setFont(Font.font("Helvetica"));
-                    new_balance.setFont(Font.font("Helvetica", FontWeight.BOLD, 40));
-                    new_balance.setFill(Color.GREEN);
+                    amount.setText(Double.toString(0));
 
-                    vBox.getChildren().add(1, new_balance);
+                    vBox.getChildren().add(1, amount);
+                    paymentAlert.setTitle("Transaction Complete");
+                    paymentAlert.show();
+
+                }
+            });
+        });
+
+        onePayment.setOnAction( e -> {
+
+            Alert alert = new Alert(AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation Dialog");
+            alert.setHeaderText("Are You Sure You Want To Proceed?");
+            ButtonType buttonTypeYes = new ButtonType("Yes");
+            ButtonType buttonTypeNo = new ButtonType("No");
+            alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
+            
+            alert.showAndWait().ifPresent(response -> {
+                
+                if (response == buttonTypeYes) {
+
+                    Alert paymentAlert = new Alert(AlertType.INFORMATION);
+                    paymentAlert.setTitle("Transaction Complete");
+                    paymentAlert.setHeaderText("Your Payment Has Been Processed!");
+
+                    user.payBalance(10);
+                    vBox.getChildren().remove(amount);
+
+                    amount.setText(Double.toString(user.getBalance()));
+
+                    vBox.getChildren().add(1, amount);
                     paymentAlert.setTitle("Transaction Complete");
                     paymentAlert.show();
 
@@ -103,3 +130,4 @@ public class PaymentPane {
 
     }
 }
+
