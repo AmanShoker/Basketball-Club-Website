@@ -47,14 +47,16 @@ public class PaymentPane {
 
         Button wholePayment = new Button("Pay Entire Balance");
         Button onePayment = new Button("Pay For One Class");
+        Button back = new Button("Back");
 
         wholePayment.setPrefSize(100,50);
         onePayment.setPrefSize(100,50);
+        back.setPrefSize(100,30);
 
         HBox hbox = new HBox(20, wholePayment, onePayment);
         hbox.setAlignment(Pos.CENTER);
 
-        VBox vBox = new VBox(20, balance, amount, hbox);
+        VBox vBox = new VBox(20, balance, amount, hbox, back);
         vBox.setAlignment(Pos.TOP_CENTER);
 
         wholePayment.setOnAction( e -> {
@@ -97,7 +99,7 @@ public class PaymentPane {
             alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
             
             alert.showAndWait().ifPresent(response -> {
-                
+
                 if (response == buttonTypeYes) {
 
                     Alert paymentAlert = new Alert(AlertType.INFORMATION);
@@ -116,6 +118,12 @@ public class PaymentPane {
                 }
             });
         });
+
+        back.setOnAction(click -> {
+            MemberPane memberPane = new MemberPane(primaryStage);
+            memberPane.show();
+        }
+        );
 
 
         stackPane.getChildren().addAll(title, vBox);
