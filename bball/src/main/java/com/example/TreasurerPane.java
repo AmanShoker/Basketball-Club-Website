@@ -1,5 +1,7 @@
 package com.example;
 
+import java.util.Map;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -31,7 +33,7 @@ public class TreasurerPane {
         title.setFont(Font.font("Helvetica", FontWeight.BOLD, 30));
         title.setLayoutY(50);
 
-        Button generateIncomeStatement = createButtonWithImage("Generate Income Statement", "/generateStatement.png");
+        Button generateIncomeStatement = createButtonWithImage("Income Statement", "/generateStatement.png");
         generateIncomeStatement.setOnAction(e -> {
             StackPane root = new StackPane();
             FileManager.database.sortAccountByRevenueDescending();
@@ -87,13 +89,135 @@ public class TreasurerPane {
             dialog.showAndWait();
         });
 
+        Button generateExpensesStatement = createButtonWithImage("Expenses Statement", "/updateExpenses.png");
+        generateExpensesStatement.setOnAction(e -> {
+            StackPane root = new StackPane();
+            FileManager.database.sortAccountByRevenueDescending();
+
+            TreeView<String> treeView = new TreeView<>();
+
+            // Set a dummy root initially
+            TreeItem<String> dummyRoot = new TreeItem<>("Expenses Statement");
+            treeView.setRoot(dummyRoot);
+
+            double total = 0;
+            for (Map.Entry<String, Account> entry : AccountDatabase.allAccounts.entrySet())
+            {
+                if (entry.getValue().getType().equals("TREASURER"))
+                {
+                    total += entry.getValue().getBalance();
+                }
+                else if (entry.getValue().getType().equals("COACH"))
+                {
+                    total += entry.getValue().getRevenue();
+                }
+            }
+
+            TreeItem<String> treeRoots = new TreeItem<>("Total Expenses");
+            TreeItem<String> treeChild11 = new TreeItem<>("Total Expenses: $" + String.valueOf(total));
+            TreeItem<String> treeChild12 = new TreeItem<>("Check below for expense sources");
+            treeRoots.getChildren().addAll(treeChild11, treeChild12);
+            dummyRoot.getChildren().add(treeRoots);
+
+            TreeItem<String> treasureRoot = new TreeItem<>("Practice Facility and Equipment Rent");
+            TreeItem<String> treasureChild = new TreeItem<>("Expenses: $" + String.valueOf(AccountDatabase.allAccounts.get(LoginPane.getUsername()).getRevenue()));
+            treasureRoot.getChildren().addAll(treasureChild);
+            dummyRoot.getChildren().add(treasureRoot);
+
+            for (Map.Entry<String, Account> entry : AccountDatabase.allAccounts.entrySet())
+            {
+                if (entry.getValue().getType().equals("COACH"))
+                {
+                    TreeItem<String> treeRoot = new TreeItem<>(entry.getValue().getUsername());
+                    TreeItem<String> treeChild1 = new TreeItem<>("Expenses: $" + String.valueOf(entry.getValue().getRevenue()));
+                    treeRoot.getChildren().add(treeChild1);
+                    dummyRoot.getChildren().add(treeRoot);
+                }
+            }
+
+            for (Map.Entry<String, Account> entry : AccountDatabase.allAccounts.entrySet())
+            {
+                if (entry.getValue().getType().equals("COACH"))
+                {
+                    TreeItem<String> treeRoot = new TreeItem<>("Unpaid: " + entry.getValue().getUsername());
+                    TreeItem<String> treeChild1 = new TreeItem<>("Unpaid Expenses: $" + String.valueOf(entry.getValue().getBalance()));
+                    treeRoot.getChildren().add(treeChild1);
+                    dummyRoot.getChildren().add(treeRoot);
+                }
+            }
+
+            root.getChildren().add(treeView);
+
+            VBox vbox = new VBox(treeView);
+            Scene scene = new Scene(vbox, 275, 400);
+            Stage dialog = new Stage();
+            dialog.setScene(scene);
+            dialog.setTitle("Expenses Statement");
+            dialog.initOwner(primaryStage);
+            dialog.showAndWait();
+        });
+
+        Button generateProfit = createButtonWithImage("View Profit", "/viewProfit.png");
+        generateProfit.setOnAction(e -> {
+            StackPane root = new StackPane();
+            FileManager.database.sortAccountByRevenueDescending();
+
+            TreeView<String> treeView = new TreeView<>();
+
+            // Set a dummy root initially
+            TreeItem<String> dummyRoot = new TreeItem<>("Profit Statement");
+            treeView.setRoot(dummyRoot);
+
+            double totalExpenses = 0;
+            for (Map.Entry<String, Account> entry : AccountDatabase.allAccounts.entrySet())
+            {
+                if (entry.getValue().getType().equals("TREASURER"))
+                {
+                    totalExpenses += entry.getValue().getBalance();
+                }
+                else if (entry.getValue().getType().equals("COACH"))
+                {
+                    totalExpenses += entry.getValue().getRevenue();
+                }
+            }
+
+            TreeItem<String> treeRoots = new TreeItem<>("Total Expenses");
+            TreeItem<String> treeChild11 = new TreeItem<>("Total Expenses: $" + String.valueOf(totalExpenses));
+            treeRoots.getChildren().addAll(treeChild11);
+            dummyRoot.getChildren().add(treeRoots);
+
+            double totalRevenue = 0;
+            for (int i = 0; i < AccountDatabase.userAccounts.size(); i++)
+            {
+                totalRevenue += AccountDatabase.userAccounts.get(i).getRevenue();
+            }
+            totalRevenue += AccountDatabase.allAccounts.get(LoginPane.getUsername()).getRevenue();
+
+            TreeItem<String> treasureRoot = new TreeItem<>("Total Revenue");
+            TreeItem<String> treasureChild = new TreeItem<>("Revenue: $" + String.valueOf(totalRevenue));
+            treasureRoot.getChildren().addAll(treasureChild);
+            dummyRoot.getChildren().add(treasureRoot);
+
+            double profit = totalRevenue - totalExpenses;
+            TreeItem<String> treeRoot = new TreeItem<>("Total Profit");
+            TreeItem<String> treeChild1 = new TreeItem<>("Expenses: $" + String.valueOf(profit));
+            treeRoot.getChildren().add(treeChild1);
+            dummyRoot.getChildren().add(treeRoot);
+
+            root.getChildren().add(treeView);
+
+            VBox vbox = new VBox(treeView);
+            Scene scene = new Scene(vbox, 275, 400);
+            Stage dialog = new Stage();
+            dialog.setScene(scene);
+            dialog.setTitle("Profit Statement");
+            dialog.initOwner(primaryStage);
+            dialog.showAndWait();
+        });
+
         HBox buttonBox = new HBox(20);
         buttonBox.setAlignment(Pos.CENTER);
-        buttonBox.getChildren().addAll(
-            generateIncomeStatement, 
-            createButtonWithImage("Update Expenses", "/updateExpenses.png"),
-            createButtonWithImage("View Monthly Profit", "/viewProfit.png")
-        );
+        buttonBox.getChildren().addAll(generateIncomeStatement, generateExpensesStatement, generateProfit);
 
         // Create logout button
         Button logoutButton = new Button("Logout");
