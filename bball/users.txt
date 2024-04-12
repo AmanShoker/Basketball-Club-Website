@@ -3,3 +3,26 @@ Lebron,123,USER
 Andre,123,TREASURER
 Jatil,234,USER
 Yakin,123,USER,0.0,N/A,N/A,true
+Sarthak,123,COACH,10.0,678-990,145 Oakfield St,true,20,120.0
+Lebron,123,USER,30.0,692-091,123 Fraud St,true,5,20.0
+Andre,123,TREASURER,1400.0,137-923,56 Burn St,true,2,1500.0
+Aman,pass1,USER,10.0,555-1234,1111 Oak St,true,15,120.0
+Yakin,password2,USER,40.0,N/A,2222 Pine St,true,8,80.0
+Jatil,EmbiidLover,USER,20.0,777-3456,3333 Maple St,true,20,100.0
+Balraj,pass4,COACH,10.0,N/A,4444 Cedar St,true,5,50.0
+James,password5,USER,0.0,888-5678,5555 Birch St,true,10,100.0
+Jessica,pass6,USER,10.0,N/A,6666 Elm St,true,7,70.0
+Joob,harjoban1,USER,30.0,999-6789,7777 Cherry St,true,12,120.0
+Maria,pass8,USER,20.0,N/A,8888 Spruce St,true,4,40.0
+Drake,6god,USER,20.0,111-4567,9999 Willow St,true,3,30.0
+Laura,pass10,USER,10.0,222-9876,1000 Hemlock St,true,6,60.0
+Christopher,password11,USER,40.0,333-8765,1100 Fir St,true,9,90.0
+HoopGirl,pass12,COACH,0.0,N/A,1200 Cypress St,true,18,110.0
+Nim,pass13,USER,20.0,444-1234,1300 Magnolia St,true,5,50.0
+Sophia,pass14,USER,50.0,N/A,1400 Juniper St,true,11,110.0
+Ajveer,password15,USER,20.0,555-6789,1500 Sycamore St,true,8,80.0
+Emily,pass16,USER,30.0,N/A,1600 Aspen St,true,17,120.0
+John,pass17,USER,30.0,666-3456,1700 Alder St,true,10,100.0
+Kabir,password18,USER,10.0,N/A,1800 Olive St,true,4,40.0
+Jarad,juice,USER,20.0,777-9876,1900 Palm St,true,8,80.0
+KimK,ye,USER,10.0,N/A,2000 Teak St,true,9,90.0
