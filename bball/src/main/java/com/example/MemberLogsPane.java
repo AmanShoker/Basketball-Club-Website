@@ -91,7 +91,7 @@ public class MemberLogsPane
             }
             else if (option.equals("Revenue Ascending"))
             {
-                FileManager.database.sortAccountByRevenueDescending();
+                FileManager.database.sortAccountByRevenueAscending();
             }
             else
             {
