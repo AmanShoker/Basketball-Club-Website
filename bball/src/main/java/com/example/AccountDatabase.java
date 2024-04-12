@@ -134,4 +134,39 @@ public class AccountDatabase {
             }	
         }
     }
+
+    
+    //Low to High
+    public void sortAccountByRevenueAscending() {
+        Collections.sort(userAccounts, new AccountRevenueAscendingComparator());
+    }
+    
+    private class AccountRevenueAscendingComparator implements Comparator<Account> {
+        public int compare(Account a, Account b) {
+            if (a.getRevenue() > b.getRevenue()) {
+                return 1;
+            } else if (a.getRevenue() < b.getRevenue()) {
+                return -1;
+            } else {
+                return 0;
+            }	
+        }
+    }
+        
+    //High to Low
+    public void sortAccountByRevenueDescending() {
+        Collections.sort(userAccounts, new AccountRevenueDescendingComparator());
+    }
+    
+    private class AccountRevenueDescendingComparator implements Comparator<Account> {
+        public int compare(Account a, Account b) {
+            if (a.getRevenue() < b.getRevenue()) {
+                return 1;
+            } else if (a.getRevenue() > b.getRevenue()) {
+                return -1;
+            } else {
+                return 0;
+            }	
+        }
+    }
 }
