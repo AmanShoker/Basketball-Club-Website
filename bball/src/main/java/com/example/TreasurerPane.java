@@ -31,10 +31,59 @@ public class TreasurerPane {
         title.setFont(Font.font("Helvetica", FontWeight.BOLD, 30));
         title.setLayoutY(50);
 
+        Button generateIncomeStatement = createButtonWithImage("Generate Income Statement", "/generateStatement.png");
+        generateIncomeStatement.setOnAction(e -> {
+            StackPane root = new StackPane();
+            FileManager.database.sortAccountByRevenueDescending();
+
+            TreeView<String> treeView = new TreeView<>();
+
+            // Set a dummy root initially
+            TreeItem<String> dummyRoot = new TreeItem<>("Income Statement");
+            treeView.setRoot(dummyRoot);
+
+            double total = 0;
+            for (int i = 0; i < AccountDatabase.userAccounts.size(); i++)
+            {
+                total += AccountDatabase.userAccounts.get(i).getRevenue();
+            }
+            TreeItem<String> treeRoots = new TreeItem<>("Total Income");
+            TreeItem<String> treeChild11 = new TreeItem<>("Total Income: $" + String.valueOf(total));
+            TreeItem<String> treeChild12 = new TreeItem<>("Check below for income sources");
+            treeRoots.getChildren().addAll(treeChild11, treeChild12);
+            dummyRoot.getChildren().add(treeRoots);
+
+            // Populate the tree with root items and their children
+            for (int i = 0; i < AccountDatabase.userAccounts.size(); i++) 
+            {
+                if (AccountDatabase.userAccounts.get(i).getRevenue() <= 0)
+                {
+                    continue;
+                }
+                TreeItem<String> treeRoot = new TreeItem<>(AccountDatabase.userAccounts.get(i).getUsername());
+                TreeItem<String> treeChild1 = new TreeItem<>("Revenue: $" + String.valueOf(AccountDatabase.userAccounts.get(i).getRevenue()));
+                // Add child items for each root item
+                treeRoot.getChildren().add(treeChild1);
+            //    treeRoot.getChildren().add(treeChild2);
+              //  treeRoot.getChildren().add(treeChild3);
+                dummyRoot.getChildren().add(treeRoot);
+            }
+
+            root.getChildren().add(treeView);
+
+            VBox vbox = new VBox(treeView);
+            Scene scene = new Scene(vbox, 275, 400);
+            Stage dialog = new Stage();
+            dialog.setScene(scene);
+            dialog.setTitle("Income Statement");
+            dialog.initOwner(primaryStage);
+            dialog.showAndWait();
+        });
+
         HBox buttonBox = new HBox(20);
         buttonBox.setAlignment(Pos.CENTER);
         buttonBox.getChildren().addAll(
-            createButtonWithImage("Generate Income Statement", "/generateStatement.png"), 
+            generateIncomeStatement, 
             createButtonWithImage("Update Expenses", "/updateExpenses.png"),
             createButtonWithImage("View Monthly Profit", "/viewProfit.png")
         );
