@@ -12,7 +12,7 @@ public class Account implements Comparable<Account> {
     private String address;
     private Boolean feesPaid;
     private int attendence;
-    private static double revenue = 0;
+    private double revenue;
     private ArrayList<String> messages;
 	
 	public Account() {
@@ -24,6 +24,7 @@ public class Account implements Comparable<Account> {
         this.address = "N/A";
         this.feesPaid = true;
         this.attendence = 0;
+        this.revenue = 0;
         this.messages = new ArrayList<String>();
 	}
 
@@ -115,16 +116,16 @@ public class Account implements Comparable<Account> {
         return this.attendence;
     }
 
-    public static void setRevenue(double amount) {
-        revenue = amount;
+    public void setRevenue(double amount) {
+        this.revenue = amount;
     }
 
-    public static void addToRevenue(double amount) {
-        revenue += amount;
+    public void addToRevenue(double amount) {
+        this.revenue += amount;
     }
 
-    public static double getRevenue() {
-        return revenue;
+    public double getRevenue() {
+        return this.revenue;
     }
 
     public ArrayList<String> getMessages() {
