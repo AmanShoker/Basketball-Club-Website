@@ -11,7 +11,7 @@ public class FileManager {
         database = new AccountDatabase();
     }
 
-    public AccountDatabase getDatabase() {
+    public static AccountDatabase getDatabase() {
         return database;
     }
 

@@ -122,7 +122,12 @@ public class PaymentPane {
                         paymentAlert.setTitle("Transaction Complete");
                         paymentAlert.setHeaderText("Your Payment Has Been Processed!");
 
-                        user.payBalance(10);
+                        if (user.getBalance() % 10 != 0){
+                            user.payBalance(9);
+                        } else {
+                            user.payBalance(10);
+                        }
+
                         vBox.getChildren().remove(amount);
 
                         amount.setText(Double.toString(user.getBalance()));
