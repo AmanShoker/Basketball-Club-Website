@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 
 public class LoginPane {
     private Stage primaryStage;
+    private static String username;
 
     public LoginPane(Stage primaryStage) {
         this.primaryStage = primaryStage;
@@ -58,7 +59,7 @@ public class LoginPane {
         loginButton.setFont(Font.font("Helvetica"));
         GridPane.setConstraints(loginButton, 0, 2);
         loginButton.setOnAction(e -> {
-            String username = usernameField.getText();
+            username = usernameField.getText();
             String password = passwordField.getText();
 
             Account account = new Account(username, password);
@@ -109,6 +110,10 @@ public class LoginPane {
     private void navigateToTreasurerPage() {
         TreasurerPane treasurerPane = new TreasurerPane(primaryStage);
         treasurerPane.show();
+    }
+
+    public static String getUsername(){
+        return username;
     }
     
 }
