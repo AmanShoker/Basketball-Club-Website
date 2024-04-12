@@ -1,5 +1,7 @@
 package com.example;
 
+import java.util.ArrayList;
+
 public class Account implements Comparable<Account> {
     
     private String username;			
@@ -11,6 +13,7 @@ public class Account implements Comparable<Account> {
     private Boolean feesPaid;
     private int attendence;
     private double revenue;
+    private ArrayList<String> messages;
 	
 	public Account() {
 		this.username = "";
@@ -22,6 +25,7 @@ public class Account implements Comparable<Account> {
         this.feesPaid = true;
         this.attendence = 0;
         this.revenue = 0;
+        this.messages = new ArrayList<String>();
 	}
 
     public Account(String username, String password) {
@@ -73,7 +77,7 @@ public class Account implements Comparable<Account> {
     public void payBalance(double amount) {
         this.balance -= amount;
         setFeesPaid(this.balance <= 0);
-        AddToBalance(amount);
+        addToRevenue(amount);
     }
 
     public String getPhoneNumber() {
@@ -122,5 +126,13 @@ public class Account implements Comparable<Account> {
 
     public double getRevenue() {
         return this.revenue;
+    }
+
+    public ArrayList<String> getMessages() {
+        return this.messages;
+    }
+
+    public void addMessage(String meesage) {
+        this.messages.add(meesage);
     }
 }
