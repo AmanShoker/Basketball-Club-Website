@@ -12,6 +12,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.scene.layout.VBox;
 
 public class TreasurerPane {
     
@@ -27,19 +28,29 @@ public class TreasurerPane {
         StackPane stackPane = new StackPane();
 
         Text title = new Text("Welcome to the Treasurer Page!");
-        stackPane.setAlignment(Pos.TOP_CENTER);
         title.setFont(Font.font("Helvetica", FontWeight.BOLD, 30));
         title.setLayoutY(50);
 
-
         HBox buttonBox = new HBox(20);
         buttonBox.setAlignment(Pos.CENTER);
-        buttonBox.getChildren().addAll(createButtonWithImage("Generate Income Statement", "/generateStatement.png"), createButtonWithImage("Update Expenses", "/updateExpenses.png"),
-                                                            createButtonWithImage("View Monthly Profit", "/viewProfit.png"));
+        buttonBox.getChildren().addAll(
+            createButtonWithImage("Generate Income Statement", "/generateStatement.png"), 
+            createButtonWithImage("Update Expenses", "/updateExpenses.png"),
+            createButtonWithImage("View Monthly Profit", "/viewProfit.png")
+        );
 
-        StackPane.setMargin(buttonBox, new Insets(0, 0, 0, 0));
+        // Create logout button
+        Button logoutButton = new Button("Logout");
+        logoutButton.setFont(Font.font("Helvetica", FontWeight.BOLD, 16));
+        logoutButton.setOnAction(e -> {
+            LoginPane loginPane = new LoginPane(primaryStage);
+            loginPane.show();
+        });
 
-        stackPane.getChildren().addAll(buttonBox, title);
+        VBox layout = new VBox(20);
+        layout.getChildren().addAll(title, buttonBox, logoutButton);
+        layout.setAlignment(Pos.CENTER);
+        stackPane.getChildren().add(layout);
 
         Scene scene = new Scene(stackPane, 600, 400);
         primaryStage.setScene(scene);

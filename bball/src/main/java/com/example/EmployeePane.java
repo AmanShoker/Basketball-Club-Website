@@ -6,8 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -52,12 +51,22 @@ public class EmployeePane {
                 createButtonWithImage("Finances", "/money.png"),
                 createButtonWithImage("Scheduling", "/schedule.png"),
                 sendMessageButton);
-        
-        // Position buttons slightly lower
-        StackPane.setMargin(buttonBox, new Insets(50, 0, 0, 0));
 
-        // Add title and buttons to stack pane
-        stackPane.getChildren().addAll(title, buttonBox);
+        // Position buttons slightly lower
+        VBox layout = new VBox(20);
+        layout.setAlignment(Pos.CENTER);
+        layout.getChildren().addAll(title, buttonBox);
+
+        // Logout button at the bottom
+        Button logoutButton = new Button("Logout");
+        logoutButton.setFont(Font.font("Helvetica"));
+        logoutButton.setOnAction(e -> {
+            navigateToLoginPage();
+        });
+        VBox.setMargin(logoutButton, new Insets(20, 0, 0, 0));
+        layout.getChildren().add(logoutButton);
+
+        stackPane.getChildren().add(layout);
 
         Scene scene = new Scene(stackPane, 600, 400);
         primaryStage.setScene(scene);
@@ -85,5 +94,10 @@ public class EmployeePane {
         button.setContentDisplay(javafx.scene.control.ContentDisplay.TOP);
         button.setStyle("-fx-font-size: 16px; -fx-font-family: Helvetica;");
         return button;
+    }
+
+    private void navigateToLoginPage() {
+        LoginPane loginPane = new LoginPane(primaryStage);
+        loginPane.show();
     }
 }

@@ -12,6 +12,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.scene.layout.VBox;
 
 public class MemberPane {
     
@@ -27,10 +28,8 @@ public class MemberPane {
         StackPane stackPane = new StackPane();
 
         Text title = new Text("Welcome to the Member Page!");
-        stackPane.setAlignment(Pos.TOP_CENTER);
         title.setFont(Font.font("Helvetica", FontWeight.BOLD, 30));
         title.setLayoutY(50);
-
 
         HBox buttonBox = new HBox(20);
         buttonBox.setAlignment(Pos.CENTER);
@@ -41,18 +40,26 @@ public class MemberPane {
         });
 
         Button paymentButton = createButtonWithImage("Make Payment", "/payment.png");
-        buttonBox.getChildren().addAll(scheduleButton, paymentButton);
-
         paymentButton.setOnAction(event -> {
             PaymentPane paymentPane = new PaymentPane(primaryStage);
             paymentPane.show();
         });
 
-        StackPane.setMargin(buttonBox, new Insets(0, 0, 0, 0));
+        buttonBox.getChildren().addAll(scheduleButton, paymentButton);
 
-        stackPane.getChildren().addAll(buttonBox, title);
-        stackPane.setMargin(title, new Insets(20,0,0,0));
+        // Create logout button
+        Button logoutButton = new Button("Logout");
+        logoutButton.setFont(Font.font("Helvetica", FontWeight.BOLD, 16));
+        logoutButton.setOnAction(e -> {
+            LoginPane loginPane = new LoginPane(primaryStage);
+            loginPane.show();
+        });
 
+        VBox layout = new VBox(20);
+        layout.getChildren().addAll(title, buttonBox, logoutButton);
+        layout.setAlignment(Pos.CENTER);
+        stackPane.getChildren().add(layout);
+        
         Scene scene = new Scene(stackPane, 600, 400);
         primaryStage.setScene(scene);
         primaryStage.show();
