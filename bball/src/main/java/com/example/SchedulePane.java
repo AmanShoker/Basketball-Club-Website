@@ -77,7 +77,7 @@ public class SchedulePane {
                     Account user = AccountDatabase.allAccounts.get(LoginPane.getUsername());
                     FileManager.getDatabase().sortAccountByAttendenceDescending();
                     if (AccountDatabase.userAccounts.size() >= 10){ 
-                        if (AccountDatabase.userAccounts.subList(0, 9).contains(AccountDatabase.allAccounts.get(LoginPane.getUsername()))) {
+                        if (AccountDatabase.userAccounts.subList(0, 9).contains(user) == true || user.getAttendence() >= 12) {
                             user.AddToBalance(9);
                         } else {
                             user.AddToBalance(10);
@@ -85,7 +85,7 @@ public class SchedulePane {
                     } else {
                         user.AddToBalance(9);
                     }
-                    
+                    user.attendedClass();
                     paymentAlert.setTitle("Transaction Complete");
                     paymentAlert.setHeaderText("A Charge Has Been Added to Your Account, Would You Like to Pay This Balance Now?");
                     paymentAlert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);

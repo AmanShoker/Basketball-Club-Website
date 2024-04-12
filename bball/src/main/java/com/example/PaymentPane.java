@@ -142,7 +142,6 @@ public class PaymentPane {
         }
         );
 
-
         stackPane.getChildren().addAll(title, vBox);
         stackPane.setAlignment(Pos.TOP_CENTER);
 
