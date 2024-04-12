@@ -46,7 +46,18 @@ public class PaymentPane {
 
         amount.setFill(Color.GREEN);
 
-        VBox vBox = new VBox(20, balance, amount);
+
+        Button wholePayment = new Button("Pay Entire Balance");
+        Button onePayment = new Button("Pay For One Class");
+
+        wholePayment.setPrefSize(100,50);
+        onePayment.setPrefSize(100,50);
+
+
+        HBox hbox = new HBox(20, wholePayment, onePayment);
+        hbox.setAlignment(Pos.CENTER);
+
+        VBox vBox = new VBox(20, balance, amount, hbox);
         vBox.setAlignment(Pos.TOP_CENTER);
 
         stackPane.getChildren().addAll(title, vBox);
