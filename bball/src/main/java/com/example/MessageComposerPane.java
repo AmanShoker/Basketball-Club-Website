@@ -152,7 +152,7 @@ public class MessageComposerPane {
     private void sendToAllMembers(String message) {
         for (String username : AccountDatabase.allAccounts.keySet()) {
             Account account = AccountDatabase.allAccounts.get(username);
-            account.addMessage(message);
+            account.addMessage(LoginPane.getUsername() + ": " + message);
         }
     }
 
@@ -165,7 +165,7 @@ public class MessageComposerPane {
                 String recipientUsername = recipientLabel.getText();
                 if (usernameExists(recipientUsername)) {
                     Account account = AccountDatabase.allAccounts.get(recipientUsername);
-                    account.addMessage(message);
+                    account.addMessage(LoginPane.getUsername() + ": " + message);
                 } else {
                     System.out.println("Recipient username does not exist: " + recipientUsername);
                 }
