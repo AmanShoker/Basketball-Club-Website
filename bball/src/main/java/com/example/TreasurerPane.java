@@ -47,11 +47,18 @@ public class TreasurerPane {
             {
                 total += AccountDatabase.userAccounts.get(i).getRevenue();
             }
+            total += AccountDatabase.allAccounts.get(LoginPane.getUsername()).getRevenue();
+
             TreeItem<String> treeRoots = new TreeItem<>("Total Income");
             TreeItem<String> treeChild11 = new TreeItem<>("Total Income: $" + String.valueOf(total));
             TreeItem<String> treeChild12 = new TreeItem<>("Check below for income sources");
             treeRoots.getChildren().addAll(treeChild11, treeChild12);
             dummyRoot.getChildren().add(treeRoots);
+
+            TreeItem<String> treasureRoot = new TreeItem<>("Sponsorships and Donations");
+            TreeItem<String> treasureChild = new TreeItem<>("Revenue: $" + String.valueOf(AccountDatabase.allAccounts.get(LoginPane.getUsername()).getRevenue()));
+            treasureRoot.getChildren().addAll(treasureChild);
+            dummyRoot.getChildren().add(treasureRoot);
 
             // Populate the tree with root items and their children
             for (int i = 0; i < AccountDatabase.userAccounts.size(); i++) 
