@@ -4,6 +4,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
@@ -63,6 +64,18 @@ public class MemberPane {
         Scene scene = new Scene(stackPane, 600, 400);
         primaryStage.setScene(scene);
         primaryStage.show();
+
+        Account user = AccountDatabase.allAccounts.get(LoginPane.getUsername());
+
+        if (user.getMessages().size() != 0){
+            for (String messages : user.getMessages()){
+                Alert messageAlert = new Alert(AlertType.INFORMATION);
+                messageAlert.setTitle("New Message");
+                messageAlert.setHeaderText(messages);
+                messageAlert.showAndWait();
+                user.removeMessages();
+            }
+        } 
     }
 
     private Button createButtonWithImage(String buttonText, String imagePath) {
