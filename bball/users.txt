@@ -1,6 +1,6 @@
 Sarthak,123,COACH,10.0,678-990,145 Oakfield St,true,20,120.0
 Lebron,123,USER,30.0,692-091,123 Fraud St,true,5,20.0
-Andre,123,TREASURER,20.0,137-923,56 Burn St,true,2,120.0
+Andre,123,TREASURER,1400.0,137-923,56 Burn St,true,2,1500.0
 Aman,pass1,USER,10.0,555-1234,1111 Oak St,true,15,120.0
 Yakin,password2,USER,40.0,N/A,2222 Pine St,true,8,80.0
 Jatil,EmbiidLover,USER,20.0,777-3456,3333 Maple St,true,20,100.0
