@@ -71,6 +71,14 @@ public class PaymentPane {
             alert.showAndWait().ifPresent(response -> {
                 if (response == buttonTypeYes) {
 
+                    if (user.getBalance() == 0) {
+                        Alert paymentAlert = new Alert(AlertType.ERROR);
+                        paymentAlert.setTitle("No Balance");
+                        paymentAlert.setHeaderText("There is No Balance to Pay");
+                        paymentAlert.show();
+
+                    } else {
+
                     Alert paymentAlert = new Alert(AlertType.INFORMATION);
                     paymentAlert.setTitle("Transaction Complete");
                     paymentAlert.setHeaderText("Your Payment Has Been Processed!");
@@ -84,6 +92,7 @@ public class PaymentPane {
                     vBox.getChildren().add(1, amount);
                     paymentAlert.setTitle("Transaction Complete");
                     paymentAlert.show();
+                    }
 
                 }
             });
@@ -102,19 +111,27 @@ public class PaymentPane {
 
                 if (response == buttonTypeYes) {
 
-                    Alert paymentAlert = new Alert(AlertType.INFORMATION);
-                    paymentAlert.setTitle("Transaction Complete");
-                    paymentAlert.setHeaderText("Your Payment Has Been Processed!");
+                    if (user.getBalance() == 0) {
+                        Alert paymentAlert = new Alert(AlertType.ERROR);
+                        paymentAlert.setTitle("No Balance");
+                        paymentAlert.setHeaderText("There is No Balance to Pay");
+                        paymentAlert.show();
 
-                    user.payBalance(10);
-                    vBox.getChildren().remove(amount);
+                    } else {
 
-                    amount.setText(Double.toString(user.getBalance()));
+                        Alert paymentAlert = new Alert(AlertType.INFORMATION);
+                        paymentAlert.setTitle("Transaction Complete");
+                        paymentAlert.setHeaderText("Your Payment Has Been Processed!");
 
-                    vBox.getChildren().add(1, amount);
-                    paymentAlert.setTitle("Transaction Complete");
-                    paymentAlert.show();
+                        user.payBalance(10);
+                        vBox.getChildren().remove(amount);
 
+                        amount.setText(Double.toString(user.getBalance()));
+
+                        vBox.getChildren().add(1, amount);
+                        paymentAlert.setTitle("Transaction Complete");
+                        paymentAlert.show();
+                    }
                 }
             });
         });
