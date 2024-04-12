@@ -5,7 +5,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -46,19 +45,51 @@ public class PaymentPane {
 
         amount.setFill(Color.GREEN);
 
-
         Button wholePayment = new Button("Pay Entire Balance");
         Button onePayment = new Button("Pay For One Class");
 
         wholePayment.setPrefSize(100,50);
         onePayment.setPrefSize(100,50);
 
-
         HBox hbox = new HBox(20, wholePayment, onePayment);
         hbox.setAlignment(Pos.CENTER);
 
         VBox vBox = new VBox(20, balance, amount, hbox);
         vBox.setAlignment(Pos.TOP_CENTER);
+
+        wholePayment.setOnAction( e -> {
+
+            Alert alert = new Alert(AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation Dialog");
+            alert.setHeaderText("Are You Sure You Want To Proceed?");
+            ButtonType buttonTypeYes = new ButtonType("Yes");
+            ButtonType buttonTypeNo = new ButtonType("No");
+            alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
+            
+            alert.showAndWait().ifPresent(response -> {
+                if (response == buttonTypeYes) {
+
+                    Alert paymentAlert = new Alert(AlertType.INFORMATION);
+                    paymentAlert.setTitle("Transaction Complete");
+                    paymentAlert.setHeaderText("Your Payment Has Been Processed!");
+
+
+                    user.payBalance(user.getBalance());
+                    vBox.getChildren().remove(amount);
+
+                    Text new_balance = new Text(Double.toString(0));
+                    new_balance.setFont(Font.font("Helvetica"));
+                    new_balance.setFont(Font.font("Helvetica", FontWeight.BOLD, 40));
+                    new_balance.setFill(Color.GREEN);
+
+                    vBox.getChildren().add(1, new_balance);
+                    paymentAlert.setTitle("Transaction Complete");
+                    paymentAlert.show();
+
+                }
+            });
+        });
+
 
         stackPane.getChildren().addAll(title, vBox);
         stackPane.setAlignment(Pos.TOP_CENTER);
