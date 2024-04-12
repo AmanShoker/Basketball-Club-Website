@@ -82,10 +82,6 @@ public class PaymentPane {
                         double paymentAmount = user.getBalance();
                         user.payBalance(paymentAmount);
         
-                        // Update the income statement with the payment amount
-                        IncomeStatement incomeStatement = new IncomeStatement();
-                        incomeStatement.recordRevenue(paymentAmount);
-        
                         vBox.getChildren().remove(amount);
                         amount.setText(Double.toString(0));
                         vBox.getChildren().add(1, amount);
