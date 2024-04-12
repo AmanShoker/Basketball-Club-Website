@@ -1,5 +1,8 @@
 package com.example;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.io.*;
@@ -8,12 +11,13 @@ public class AccountDatabase {
 
     private static final String USERS_FILE = "users.txt";
     
+    //Public
     public static Map<String, Account> allAccounts;
-    public static Map<String, Account> userAccounts;
+    public static ArrayList<Account> userAccounts;
 
     public AccountDatabase() {
         allAccounts = new HashMap<>();
-        userAccounts = new HashMap<>();
+        userAccounts = new ArrayList<Account>();
 
         loadDatabase();
     }
@@ -22,7 +26,7 @@ public class AccountDatabase {
         
         if (!allAccounts.containsKey((account.getUsername()))) {
             if ((account.getType()).equals("USER")) {
-                userAccounts.put(account.getUsername(), account);
+                userAccounts.add(account);
             }
             allAccounts.put(account.getUsername(), account);
         }
@@ -49,4 +53,44 @@ public class AccountDatabase {
             e.printStackTrace();
         }
     }
+
+
+
+    public void sortUsersByName() {
+		Collections.sort(userAccounts);
+	}
+
+    //Low to High
+    public void sortAccountByBalanceAscending() {
+	 Collections.sort(userAccounts, new AccountBalanceAscendingComparator());
+	}
+
+	private class AccountBalanceAscendingComparator implements Comparator<Account> {
+		public int compare(Account a, Account b) {
+			if (a.getBalance() > b.getBalance()) {
+				return 1;
+			} else if (a.getBalance() < b.getBalance()) {
+				return -1;
+			} else {
+				return 0;
+			}	
+		}
+	}
+
+    //High to Low
+    public void sortAccountByBalanceDescending() {
+        Collections.sort(userAccounts, new AccountBalanceDescendingComparator());
+       }
+   
+       private class AccountBalanceDescendingComparator implements Comparator<Account> {
+           public int compare(Account a, Account b) {
+               if (a.getBalance() < b.getBalance()) {
+                   return 1;
+               } else if (a.getBalance() > b.getBalance()) {
+                   return -1;
+               } else {
+                   return 0;
+               }	
+           }
+       }
 }

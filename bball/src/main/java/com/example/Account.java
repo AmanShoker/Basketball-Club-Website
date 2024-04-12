@@ -1,6 +1,6 @@
 package com.example;
 
-public class Account {
+public class Account implements Comparable<Account> {
     
     private String username;			
 	private String password;
@@ -24,6 +24,11 @@ public class Account {
     public boolean equals(Object other) {
 		Account otherAcc = (Account) other;
 		return username.equals(otherAcc.username) && type.equals(otherAcc.type);
+	}
+
+    public int compareTo(Account other)
+	{
+		return getUsername().compareTo(other.getUsername());
 	}
 
     public String getType() {
