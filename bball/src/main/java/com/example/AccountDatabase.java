@@ -61,7 +61,7 @@ public class AccountDatabase {
         allAccounts.put(account.getUsername(), account);
     }
 
-    public void sortUsersByName() {
+    public static void sortUsersByName() {
 		Collections.sort(userAccounts);
 	}
 
