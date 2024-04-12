@@ -5,6 +5,11 @@ import java.io.*;
 public class FileManager {
 
     private static final String USERS_FILE = "users.txt";
+    public static AccountDatabase database;
+
+    public static void createDatabase() {
+        database = new AccountDatabase();
+    }
 
     public static boolean validateUser(Account account) {
         Account storedAccount = AccountDatabase.allAccounts.get(account.getUsername());
@@ -42,15 +47,22 @@ public class FileManager {
             return false;
         }
 
-        // Register the new user
+        //Adds account to database
+        account.setType("USER");
+        database.addNewAccount(account);
+
+        // Register the new user to txt file
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(USERS_FILE, true))) {
             writer.newLine();
-            writer.write(account.getUsername() + "," + account.getPassword() + ",USER" + "\n");
+            writer.write(account.getUsername() + "," + account.getPassword() + "," + account.getType()
+                        + "," + account.getBalance() + ",N/A,N/A,true\n");
+
             return true;
         } catch (IOException e) {
             e.printStackTrace();
             return false;
         }
+
     }
 
     private static boolean userExists(String username) {

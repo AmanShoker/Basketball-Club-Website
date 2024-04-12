@@ -14,7 +14,7 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        AccountDatabase database = new AccountDatabase();
+        FileManager.createDatabase();
         launch(args);
     }
 }

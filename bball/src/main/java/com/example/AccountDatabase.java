@@ -22,14 +22,11 @@ public class AccountDatabase {
         loadDatabase();
     }
 
-    public static void storeAccount(Account account) {
-        
-        if (!allAccounts.containsKey((account.getUsername()))) {
-            if ((account.getType()).equals("USER")) {
-                userAccounts.add(account);
-            }
-            allAccounts.put(account.getUsername(), account);
+    public static void storeAccount(Account account) {    
+        if ((account.getType()).equals("USER")) {
+            userAccounts.add(account);
         }
+        allAccounts.put(account.getUsername(), account);
     }
 
     public static void loadDatabase() {
@@ -42,10 +39,13 @@ public class AccountDatabase {
                     account.setType(parts[2]);
                     storeAccount(account);
 
-                } else if (parts.length == 4) {
+                } else if (parts.length == 7) {
                     Account account = new Account(parts[0], parts[1]);
                     account.setType(parts[2]);
                     account.AddToBalance(Double.parseDouble(parts[3]));
+                    account.setPhoneNumber(parts[4]);
+                    account.setAddress(parts[5]);
+                    account.setFeesPaid(Boolean.parseBoolean(parts[6]));
                     storeAccount(account);
                 }
             }
@@ -54,7 +54,12 @@ public class AccountDatabase {
         }
     }
 
-
+    public void addNewAccount(Account account) {    
+        if ((account.getType()).equals("USER")) {
+            userAccounts.add(account);
+        }
+        allAccounts.put(account.getUsername(), account);
+    }
 
     public void sortUsersByName() {
 		Collections.sort(userAccounts);

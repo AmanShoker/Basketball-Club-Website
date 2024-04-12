@@ -4,14 +4,20 @@ public class Account implements Comparable<Account> {
     
     private String username;			
 	private String password;
+    private String type;
     private double balance;
-	private String type;
+    private String phoneNumber;
+    private String address;
+    private Boolean feesPaid;
 	
 	public Account() {
 		this.username = "";
         this.password = "";
-        this.balance = 0;
         this.type = "USER";
+        this.balance = 0;
+        this.phoneNumber = "N/A";
+        this.address = "N/A";
+        this.feesPaid = true;
 	}
 
     public Account(String username, String password) {
@@ -57,10 +63,35 @@ public class Account implements Comparable<Account> {
 
     public void AddToBalance(double amount) {
         this.balance += amount;
+        setFeesPaid(this.balance <= 0);
     }
 
     public void payBalance(double amount) {
         this.balance -= amount;
+        setFeesPaid(this.balance <= 0);
     }
 
+    public String getPhoneNumber() {
+        return this.phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+    
+    public String getAddress() {
+        return this.address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public Boolean isFeesPaid() {
+        return this.feesPaid;
+    }
+
+    public void setFeesPaid(Boolean feesPaid) {
+        this.feesPaid = feesPaid;
+    }
 }
