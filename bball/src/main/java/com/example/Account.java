@@ -136,6 +136,10 @@ public class Account implements Comparable<Account> {
         return this.messages;
     }
 
+    public void removeMessages(){
+        this.messages.remove(0);
+    }
+
     public void addMessage(String message) {
         this.messages.add(message);
     }

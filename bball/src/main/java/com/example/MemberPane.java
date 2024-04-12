@@ -14,6 +14,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.layout.VBox;
+import java.util.ArrayList;
 
 public class MemberPane {
     
@@ -68,11 +69,11 @@ public class MemberPane {
         Account user = AccountDatabase.allAccounts.get(LoginPane.getUsername());
 
         if (user.getMessages().size() != 0){
-            for (String messages : user.getMessages()){
+            for (String messages : new ArrayList<String>(user.getMessages())){
                 Alert messageAlert = new Alert(AlertType.INFORMATION);
                 messageAlert.setTitle("New Message");
                 messageAlert.setHeaderText(messages);
-                messageAlert.showAndWait();
+                messageAlert.show();
                 user.removeMessages();
             }
         } 
