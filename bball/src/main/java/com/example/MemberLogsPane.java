@@ -36,27 +36,17 @@ public class MemberLogsPane
         title.setFont(Font.font("Helvetica", FontWeight.BOLD, 30));
         title.setLayoutY(50);
 
-   //     HBox buttonBox = new HBox();
-     //   buttonBox.setAlignment(Pos.TOP_LEFT);
         Button backButton = new Button("Back");
         backButton.setStyle("-fx-font-size: 10px; -fx-font-family: Helvetica;");
         backButton.setPrefSize(50, 35);
-      //  backButton.setPadding(new Insets(0,0,0,0));
-       // buttonBox.setPadding(new Insets(0,0,0,0));
         backButton.setOnAction(e -> 
         {
             EmployeePane employeePane = new EmployeePane(primaryStage);
             employeePane.show();
         });
-      //  buttonBox.getChildren().add(backButton);
-        //stackPane.setAlignment(buttonBox, Pos.TOP_LEFT);
 
         Label message = new Label("Use the following filters to sort the list of club members: ");
         message.setStyle("-fx-font-size: 17px; -fx-font-family: Helvetica;");
-       /*  VBox messageLayout = new VBox();
-        messageLayout.getChildren().addAll(message);
-        messageLayout.setPadding(new Insets(52, 0, 0, 15));
-        messageLayout.setAlignment(Pos.TOP_LEFT); */
 
         ChoiceBox<String> filtersMenu = new ChoiceBox<>();
         filtersMenu.getItems().addAll("Alphabetical", "Attendance Ascending", "Attendance Descending", "Balance Ascending", "Balance Descending", "Revenue Ascending", "Revenue Descending");
@@ -65,7 +55,6 @@ public class MemberLogsPane
         Button submitButton = new Button("Submit");
         submitButton.setStyle("-fx-font-size: 20px; -fx-font-family: Helvetica;");
         submitButton.setPrefSize(150, 75);
-        String thing;
         submitButton.setOnAction(e -> {
             StackPane root = new StackPane();
             String option = filtersMenu.getValue();
@@ -127,8 +116,6 @@ public class MemberLogsPane
                 TreeItem<String> treeChild6 = new TreeItem<>("Classes Attended: " + String.valueOf(AccountDatabase.userAccounts.get(i).getAttendence()));
                 // Add child items for each root item
                 treeRoot.getChildren().addAll(treeChild1, treeChild2, treeChild3, treeChild4, treeChild5, treeChild6);
-            //    treeRoot.getChildren().add(treeChild2);
-              //  treeRoot.getChildren().add(treeChild3);
                 dummyRoot.getChildren().add(treeRoot);
             }
 
@@ -142,33 +129,6 @@ public class MemberLogsPane
             dialog.initOwner(primaryStage);
             dialog.showAndWait();
         });
-
-      /*   TreeView<String> tree;
-        TreeItem<String> root, bucky, megan;
-        root = new TreeItem<>();
-        root.setExpanded(true);
-        bucky = makeBranch("Bucky", root);
-        megan = makeBranch("Megan", root);
-        makeBranch("thenewboston", bucky);
-        makeBranch("Youtube", bucky);
-        makeBranch("Chicken", bucky);
-        makeBranch("Glitter", megan);
-        makeBranch("Makeup", megan);
-        tree = new TreeView<>(root); 
-        tree.setShowRoot(false); */
-
-       /*  VBox layout = new VBox();
-        layout.getChildren().addAll(filtersMenu);
-        layout.setPadding(new Insets(50, 50, 0, 0));
-        layout.setAlignment(Pos.TOP_RIGHT);
-
-        BorderPane pane = new BorderPane();
-        pane.setTop(layout);
-        pane.setLeft(buttonBox);
-        pane.setAlignment(layout, Pos.TOP_RIGHT);
-        pane.setAlignment(buttonBox, Pos.TOP_LEFT);
-        //pane.getChildren().addAll(layout, messageLayout); */
-
 
         stackPane.getChildren().addAll(title, message, backButton, filtersMenu, submitButton);
         stackPane.setAlignment(backButton, Pos.TOP_LEFT);
@@ -190,11 +150,5 @@ public class MemberLogsPane
         item.setExpanded(true);
         parent.getChildren().add(item);
         return item;
-    }
-
-    private void getChoice(ChoiceBox<String> choiceBox)
-    {
-        String option = choiceBox.getValue();
-        System.out.println(option);
     }
 }
