@@ -51,6 +51,7 @@ public class MemberPane {
         StackPane.setMargin(buttonBox, new Insets(0, 0, 0, 0));
 
         stackPane.getChildren().addAll(buttonBox, title);
+        stackPane.setMargin(title, new Insets(20,0,0,0));
 
         Scene scene = new Scene(stackPane, 600, 400);
         primaryStage.setScene(scene);
