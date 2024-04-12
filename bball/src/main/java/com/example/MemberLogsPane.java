@@ -59,8 +59,103 @@ public class MemberLogsPane
         messageLayout.setAlignment(Pos.TOP_LEFT); */
 
         ChoiceBox<String> filtersMenu = new ChoiceBox<>();
-        filtersMenu.getItems().addAll("Alphabetical", "Attendance", "Paid");
+        filtersMenu.getItems().addAll("Alphabetical", "Attendance Ascending", "Attendance Descending", "Balance Ascending", "Balance Descending", "Revenue Ascending", "Revenue Descending");
         filtersMenu.setValue("Alphabetical");
+
+        Button submitButton = new Button("Submit");
+        submitButton.setStyle("-fx-font-size: 20px; -fx-font-family: Helvetica;");
+        submitButton.setPrefSize(150, 75);
+        String thing;
+        submitButton.setOnAction(e -> {
+            StackPane root = new StackPane();
+            String option = filtersMenu.getValue();
+            if (option.equals("Alphabetical"))
+            {
+                AccountDatabase.sortUsersByName();
+            }
+            else if (option.equals("Attendance Ascending"))
+            {
+                FileManager.database.sortAccountByAttendenceAscending();
+            }
+            else if (option.equals("Attendance Descending"))
+            {
+                FileManager.database.sortAccountByAttendenceDescending();
+            }
+            else if (option.equals("Balance Ascending"))
+            {
+                FileManager.database.sortAccountByBalanceAscending();
+            }
+            else if (option.equals("Balance Descending"))
+            {
+                FileManager.database.sortAccountByBalanceDescending();
+            }
+            else if (option.equals("Revenue Ascending"))
+            {
+                FileManager.database.sortAccountByRevenueDescending();
+            }
+            else
+            {
+                FileManager.database.sortAccountByRevenueDescending();
+            }
+
+            TreeView<String> treeView = new TreeView<>();
+
+            // Set a dummy root initially
+            TreeItem<String> dummyRoot = new TreeItem<>("List Of Members");
+            treeView.setRoot(dummyRoot);
+
+            // Populate the tree with root items and their children
+            for (int i = 0; i < AccountDatabase.userAccounts.size(); i++) 
+            {
+                TreeItem<String> treeRoot = new TreeItem<>(AccountDatabase.userAccounts.get(i).getUsername());
+
+                TreeItem<String> treeChild1 = new TreeItem<>("Phone Number: " + AccountDatabase.userAccounts.get(i).getPhoneNumber());
+                TreeItem<String> treeChild2 = new TreeItem<>("Address: " + AccountDatabase.userAccounts.get(i).getAddress());
+                TreeItem<String> treeChild3;
+                
+                 if (AccountDatabase.userAccounts.get(i).getBalance() == 0)
+                {
+                    treeChild3 = new TreeItem<>("Paid");
+                }
+                else
+                {
+                    treeChild3 = new TreeItem<>("Not Paid");
+                } 
+
+                TreeItem<String> treeChild4 = new TreeItem<>("Balance: $" + String.valueOf(AccountDatabase.userAccounts.get(i).getBalance()));
+                TreeItem<String> treeChild5 = new TreeItem<>("Revenue: $" + String.valueOf(AccountDatabase.userAccounts.get(i).getRevenue()));
+                TreeItem<String> treeChild6 = new TreeItem<>("Classes Attended: " + String.valueOf(AccountDatabase.userAccounts.get(i).getAttendence()));
+                // Add child items for each root item
+                treeRoot.getChildren().addAll(treeChild1, treeChild2, treeChild3, treeChild4, treeChild5, treeChild6);
+            //    treeRoot.getChildren().add(treeChild2);
+              //  treeRoot.getChildren().add(treeChild3);
+                dummyRoot.getChildren().add(treeRoot);
+            }
+
+            root.getChildren().add(treeView);
+
+            VBox vbox = new VBox(treeView);
+            Scene scene = new Scene(vbox, 250, 400);
+            Stage dialog = new Stage();
+            dialog.setScene(scene);
+            dialog.setTitle("Log of Members");
+            dialog.initOwner(primaryStage);
+            dialog.showAndWait();
+        });
+
+      /*   TreeView<String> tree;
+        TreeItem<String> root, bucky, megan;
+        root = new TreeItem<>();
+        root.setExpanded(true);
+        bucky = makeBranch("Bucky", root);
+        megan = makeBranch("Megan", root);
+        makeBranch("thenewboston", bucky);
+        makeBranch("Youtube", bucky);
+        makeBranch("Chicken", bucky);
+        makeBranch("Glitter", megan);
+        makeBranch("Makeup", megan);
+        tree = new TreeView<>(root); 
+        tree.setShowRoot(false); */
 
        /*  VBox layout = new VBox();
         layout.getChildren().addAll(filtersMenu);
@@ -75,28 +170,31 @@ public class MemberLogsPane
         //pane.getChildren().addAll(layout, messageLayout); */
 
 
-        stackPane.getChildren().addAll(title, message, backButton, filtersMenu);
+        stackPane.getChildren().addAll(title, message, backButton, filtersMenu, submitButton);
         stackPane.setAlignment(backButton, Pos.TOP_LEFT);
-        stackPane.setAlignment(filtersMenu, Pos.TOP_RIGHT);
-        stackPane.setMargin(filtersMenu, new Insets(50, 50, 0, 0));
+        stackPane.setAlignment(filtersMenu, Pos.TOP_CENTER);
+        stackPane.setMargin(filtersMenu, new Insets(100, 0, 0, 0));
         stackPane.setMargin(message, new Insets(52, 0, 0, 15));
         stackPane.setAlignment(message, Pos.TOP_LEFT);
+        stackPane.setAlignment(submitButton, Pos.BOTTOM_CENTER);
+        stackPane.setMargin(submitButton, new Insets(0, 0, 10, 0));
 
 
         Scene scene = new Scene(stackPane, 600, 400);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-
-    private Button createButtonWithImage(String buttonText, String imagePath) 
+    public TreeItem<String> makeBranch(String title, TreeItem<String> parent)
     {
-        Image image = new Image(getClass().getResourceAsStream(imagePath));
-        ImageView imageView = new ImageView(image);
-        imageView.setFitHeight(10);
-        imageView.setFitWidth(10);
-        Button button = new Button(buttonText, imageView);
-        button.setContentDisplay(javafx.scene.control.ContentDisplay.TOP);
-        button.setStyle("-fx-font-size: 1px; -fx-font-family: Helvetica;");
-        return button;
+        TreeItem<String> item = new TreeItem<>(title);
+        item.setExpanded(true);
+        parent.getChildren().add(item);
+        return item;
+    }
+
+    private void getChoice(ChoiceBox<String> choiceBox)
+    {
+        String option = choiceBox.getValue();
+        System.out.println(option);
     }
 }
