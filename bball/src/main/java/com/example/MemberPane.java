@@ -39,8 +39,14 @@ public class MemberPane {
             SchedulePane schedulePane = new SchedulePane(primaryStage);
             schedulePane.show();
         });
+
         Button paymentButton = createButtonWithImage("Make Payment", "/payment.png");
         buttonBox.getChildren().addAll(scheduleButton, paymentButton);
+
+        paymentButton.setOnAction(event -> {
+            PaymentPane paymentPane = new PaymentPane(primaryStage);
+            paymentPane.show();
+        });
 
         StackPane.setMargin(buttonBox, new Insets(0, 0, 0, 0));
 
