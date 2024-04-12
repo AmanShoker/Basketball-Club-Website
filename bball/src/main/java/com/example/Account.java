@@ -101,6 +101,10 @@ public class Account implements Comparable<Account> {
         this.attendence += 1;
     }
 
+    public void setAttendence(int attendence) {
+        this.attendence = attendence;
+    }
+
     public int getAttendence() {
         return this.attendence;
     }

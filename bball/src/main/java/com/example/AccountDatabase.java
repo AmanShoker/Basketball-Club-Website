@@ -39,13 +39,14 @@ public class AccountDatabase {
                     account.setType(parts[2]);
                     storeAccount(account);
 
-                } else if (parts.length == 7) {
+                } else if (parts.length == 8) {
                     Account account = new Account(parts[0], parts[1]);
                     account.setType(parts[2]);
                     account.AddToBalance(Double.parseDouble(parts[3]));
                     account.setPhoneNumber(parts[4]);
                     account.setAddress(parts[5]);
                     account.setFeesPaid(Boolean.parseBoolean(parts[6]));
+                    account.setAttendence(Integer.parseInt(parts[7]));
                     storeAccount(account);
                 }
             }
