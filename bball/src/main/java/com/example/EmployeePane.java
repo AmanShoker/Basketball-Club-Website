@@ -54,7 +54,6 @@ public class EmployeePane {
 
         buttonBox.getChildren().addAll(
                 memberLogsButton,
-                createButtonWithImage("Finances", "/money.png"),
                 schedulingButton,
                 sendMessageButton);
 

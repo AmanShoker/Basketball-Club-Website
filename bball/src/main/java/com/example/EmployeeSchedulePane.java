@@ -10,6 +10,7 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import java.util.ArrayList;
 import javafx.scene.layout.VBox;
+import javafx.scene.control.ScrollPane;
 
 public class EmployeeSchedulePane {
     private Stage primaryStage;
@@ -51,6 +52,13 @@ public class EmployeeSchedulePane {
             // Add the class name label and student list to the main container
             container.getChildren().addAll(classLabel, studentList);
         }
+
+        // Create a ScrollPane and set its content to the VBox container
+        ScrollPane scrollPane = new ScrollPane(container);
+        scrollPane.setFitToWidth(true); // Allow horizontal scrolling if necessary
+
+        // Add the ScrollPane to the StackPane
+        stackPane.getChildren().add(scrollPane);
 
         // Create the scene and set it to the primary stage
         stackPane.getChildren().add(container);
