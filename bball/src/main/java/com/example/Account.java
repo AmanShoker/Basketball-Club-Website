@@ -73,12 +73,10 @@ public class Account implements Comparable<Account> {
 
     public void AddToBalance(double amount) {
         this.balance += amount;
-        setFeesPaid(this.balance <= 0);
     }
 
     public void payBalance(double amount) {
         this.balance -= amount;
-        setFeesPaid(this.balance <= 0);
         addToRevenue(amount);
     }
 
