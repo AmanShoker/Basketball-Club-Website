@@ -69,7 +69,7 @@ public class MemberPane {
 
         Account user = AccountDatabase.allAccounts.get(LoginPane.getUsername());
 
-        if (user.getBalance() >= 30 && !user.isFeesPaid()) {
+        if (user.getBalance() >= 30 && user.isFeesPaid() == false) {
             Alert messageAlert = new Alert(AlertType.INFORMATION);
             messageAlert.setTitle("Penalty Fee");
             messageAlert.setHeaderText("You Have Missed Payment For 3 Classes, and Have Recieved a $10 Fee");
