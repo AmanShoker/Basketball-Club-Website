@@ -1,6 +1,5 @@
 package com.example;
 
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -15,8 +14,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.layout.VBox;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Collections;
+
 
 public class MemberPane {
     
@@ -34,6 +32,7 @@ public class MemberPane {
         Text title = new Text("Welcome to the Member Page!");
         title.setFont(Font.font("Helvetica", FontWeight.BOLD, 30));
         title.setLayoutY(50);
+
 
         HBox buttonBox = new HBox(20);
         buttonBox.setAlignment(Pos.CENTER);
@@ -69,6 +68,16 @@ public class MemberPane {
         primaryStage.show();
 
         Account user = AccountDatabase.allAccounts.get(LoginPane.getUsername());
+
+        if (user.getBalance() >= 30 && !user.isFeesPaid()) {
+            Alert messageAlert = new Alert(AlertType.INFORMATION);
+            messageAlert.setTitle("Penalty Fee");
+            messageAlert.setHeaderText("You Have Missed Payment For 3 Classes, and Have Recieved a $10 Fee");
+            user.AddToBalance(10);
+            user.setFeesPaid(true);
+            messageAlert.showAndWait();
+        }
+
         if (user.getMessages().size() != 0){
             for (String messages : new ArrayList<String>(user.getMessages())){
                 Alert messageAlert = new Alert(AlertType.INFORMATION);

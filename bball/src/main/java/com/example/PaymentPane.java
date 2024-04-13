@@ -49,8 +49,8 @@ public class PaymentPane {
         Button onePayment = new Button("Pay For One Class");
         Button back = new Button("Back");
 
-        wholePayment.setPrefSize(100,50);
-        onePayment.setPrefSize(100,50);
+        wholePayment.setPrefSize(150,50);
+        onePayment.setPrefSize(150,50);
         back.setPrefSize(100,30);
 
         HBox hbox = new HBox(20, wholePayment, onePayment);
