@@ -46,10 +46,16 @@ public class EmployeePane {
             messageComposerPane.show();
         });
 
+        Button schedulingButton = createButtonWithImage("Scheduling", "/schedule.png");
+        schedulingButton.setOnAction(e -> {
+            EmployeeSchedulePane employeeSchedulePane = new EmployeeSchedulePane(primaryStage);
+            employeeSchedulePane.show();
+        });
+
         buttonBox.getChildren().addAll(
                 memberLogsButton,
                 createButtonWithImage("Finances", "/money.png"),
-                createButtonWithImage("Scheduling", "/schedule.png"),
+                schedulingButton,
                 sendMessageButton);
 
         // Position buttons slightly lower
