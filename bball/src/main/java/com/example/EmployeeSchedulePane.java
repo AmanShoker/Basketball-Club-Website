@@ -3,13 +3,14 @@ package com.example;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import java.util.ArrayList;
-import javafx.scene.layout.VBox;
 import javafx.scene.control.ScrollPane;
 
 public class EmployeeSchedulePane {
@@ -60,8 +61,17 @@ public class EmployeeSchedulePane {
         // Add the ScrollPane to the StackPane
         stackPane.getChildren().add(scrollPane);
 
+        // Create a back button
+        Button backButton = new Button("Back");
+        backButton.setOnAction(e -> {
+            EmployeePane employeePane = new EmployeePane(primaryStage);
+            employeePane.show();
+        });
+
+        // Add the back button to the VBox container
+        container.getChildren().add(backButton);
+
         // Create the scene and set it to the primary stage
-        stackPane.getChildren().add(container);
         Scene scene = new Scene(stackPane, 400, 300);
         primaryStage.setScene(scene);
         primaryStage.show();
