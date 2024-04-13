@@ -88,11 +88,14 @@ public class SchedulePane {
                     } else {
                         user.AddToBalance(9);
                     }
+                    
                     user.attendedClass();
                     user.addClasses(comboBox.getValue());
+                    yesButton.setDisable(true);
                     paymentAlert.setTitle("Transaction Complete");
                     paymentAlert.setHeaderText("A Charge Has Been Added to Your Account, Would You Like to Pay This Balance Now?");
                     paymentAlert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
+
                     paymentAlert.showAndWait().ifPresent(event -> {
                         if (event == buttonTypeYes) {
                             PaymentPane paymentPane = new PaymentPane(primaryStage);
