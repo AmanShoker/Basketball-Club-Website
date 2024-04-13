@@ -43,6 +43,7 @@ public class EmployeeSchedulePane {
 
             // Create a VBox to hold the list of students
             VBox studentList = new VBox(5);
+            studentList.setAlignment(Pos.CENTER);
 
             // Add each student to the studentList VBox
             for (String student : studentsInClass) {
