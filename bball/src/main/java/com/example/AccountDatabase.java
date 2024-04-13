@@ -53,9 +53,24 @@ public class AccountDatabase {
                     storeAccount(account);
                 }
             }
+
+            initializeCoachClasses();
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void initializeCoachClasses() {
+        Account sarthak = allAccounts.get("Sarthak");
+        sarthak.addClasses("Week 1");
+
+        Account hoopGirl = allAccounts.get("HoopGirl");
+        hoopGirl.addClasses("Week 2");
+
+        Account balraj = allAccounts.get("Balraj");
+        balraj.addClasses("Week 3");
+        balraj.addClasses("Week 4");
     }
 
     public void addNewAccount(Account account) {    
