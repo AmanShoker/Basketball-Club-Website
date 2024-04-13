@@ -71,6 +71,10 @@ public class Account implements Comparable<Account> {
         return this.balance;
     }
 
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
     public void AddToBalance(double amount) {
         this.balance += amount;
     }

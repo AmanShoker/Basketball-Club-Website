@@ -52,22 +52,18 @@ public class FileManager {
         }
 
         //Adds account to database
+        account.setBalance(0.0);
+        account.setPhoneNumber("000-0000");
+        account.setAddress("123 Fake St");
+        account.setFeesPaid(true);
+        account.setAttendence(0);
+        account.setRevenue(0.0);
+        account.setMessages();
+        account.setClasses();
         account.setType("USER");
         database.addNewAccount(account);
 
-        // Register the new user to txt file
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(USERS_FILE, true))) {
-            writer.newLine();
-            writer.write(account.getUsername() + "," + account.getPassword() + "," + account.getType()
-                        + "," + account.getBalance() + ",N/A,N/A,true," + account.getAttendence() 
-                        + "," + account.getRevenue() +"\n");
-
-            return true;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
-
+        return true;
     }
 
     private static boolean userExists(String username) {
